@@ -60,7 +60,19 @@ public class PlayerMovement : PlayerBase {
 		}
 		else
 		{
-			transform.position = Vector3.MoveTowards(transform.position, networkPosition, Time.deltaTime * moveSpeed);
+			float pingInSeconds = (float)PhotonNetwork.GetPing() * 0.001f;
+			float timeSinceLastUpdate = (float)(PhotonNetwork.time - lastNetworkDataRecievedTime);
+			float totalTimePassed = pingInSeconds + timeSinceLastUpdate;
+
+			Vector3 exterpolatedTargetPosition = networkPosition + transform.forward * moveSpeed * totalTimePassed;
+			Vector3 newPosition = Vector3.MoveTowards(transform.position, exterpolatedTargetPosition, moveSpeed * Time.deltaTime);
+
+			if (Vector3.Distance(transform.position, exterpolatedTargetPosition) >= 2f)
+				newPosition = exterpolatedTargetPosition;
+
+			transform.position = newPosition;
+
+			//transform.position = Vector3.MoveTowards(transform.position, networkPosition, Time.deltaTime * moveSpeed);
 			transform.rotation = Quaternion.RotateTowards(transform.rotation, networkRotation, Time.deltaTime * 500);
 		}
 

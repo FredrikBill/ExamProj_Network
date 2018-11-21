@@ -93,10 +93,12 @@ public class PlayerBase : Photon.MonoBehaviour, IPunObservable {
 	}
 
 	protected float lag;
+	protected float lastNetworkDataRecievedTime;
 
 	public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
 	{
 		lag = Mathf.Abs((float)(PhotonNetwork.time - info.timestamp));
+		lastNetworkDataRecievedTime = (float)info.timestamp;
 		PMovement.SerializeState(stream, info);
 		PController.SerializeState(stream, info);
 	}
