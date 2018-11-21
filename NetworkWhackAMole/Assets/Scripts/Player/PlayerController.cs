@@ -9,8 +9,18 @@ public class PlayerController : PlayerBase {
 	//Also currently takes care of animations
 
 	[SerializeField]
-	private float invincibilityTime = 2f;
-	private float timer;
+	private AnimationCurve hurtCurve;
+	[SerializeField]
+	private Color hurtColor;
+
+	[SerializeField]
+	private float invincibilityTime
+	{
+		get
+		{
+			return hurtCurve.keys[hurtCurve.keys.Length - 1].time;
+		}
+	}
 
 	private Hammer myHammer;
 	public Hammer MyHammer { get { return myHammer; } }
@@ -30,18 +40,6 @@ public class PlayerController : PlayerBase {
 	{
 		if(photonView.isMine)
 			PAnimator.SetBool("Whack", PInput.WhackButton);
-
-		ProcessInvincibility();
-	}
-
-	private void ProcessInvincibility()
-	{
-		if (isInvincible)
-		{
-			timer += Time.deltaTime;
-			if (timer >= invincibilityTime)
-				InvincibleTimeOver();
-		}
 	}
 
 	public void EnableHammerHitbox()
@@ -64,44 +62,44 @@ public class PlayerController : PlayerBase {
 	public void Whacked()
 	{
 		isInvincible = true;
-		timer = 0;
 		PMovement.targetSpeed = PMovement.StunnedMoveSpeed;
 		StartCoroutine("InvincibilityFlicker");
-	}
-
-	public void InvincibleTimeOver()
-	{
-		timer = 0;
-		isInvincible = false;
-		PMovement.targetSpeed = PMovement.MoveSpeed;
 	}
 
 	//Not tested at all, going to be used as visual cue for taking damage
 	private IEnumerator InvincibilityFlicker()
 	{
-		Material[] bodyMaterials = GetComponentsInChildren<Material>();
+		//Get all of the mesh renderers on the character
+		MeshRenderer[] meshRends = GetComponentsInChildren<MeshRenderer>();
+		//Get all of the materials on the meshes
+		Material[] bodyMaterials = new Material[meshRends.Length];
+		for (int i = 0; i < meshRends.Length; i++)
+		{
+			bodyMaterials[i] = meshRends[i].material;
+		}
+		//Set a reference to the materials base color
 		Color[] startColors = new Color[bodyMaterials.Length];
-		Color[] targetColors = new Color[bodyMaterials.Length];
 		for (int i = 0; i < bodyMaterials.Length; i++)
 		{
 			startColors[i] = bodyMaterials[i].color;
-			targetColors[i] = startColors[i];
-			targetColors[i].a = 0;
 		}
-		float timer  = 0;
-		float inTime = invincibilityTime;
-		float currentValue;
 
-		while(timer <= invincibilityTime)
+		float timer = 0;
+		isInvincible = true;
+		PAnimator.SetBool("Whacked", false);
+
+		//Start blinking, time is determined by the last keyframe from the hurtCurve
+		while (timer <= invincibilityTime)
 		{
-			currentValue = timer / inTime;
-			currentValue = Mathf.Sin(currentValue * Mathf.PI * .5f);
+			timer += Time.deltaTime;
+
 			for (int i = 0; i < bodyMaterials.Length; i++)
 			{
-				bodyMaterials[i].color = Color.Lerp(startColors[i], targetColors[i], currentValue);
+				bodyMaterials[i].color = Color.Lerp(startColors[i], hurtColor, hurtCurve.Evaluate(timer));
 			}
 			yield return new WaitForEndOfFrame();
 		}
+		isInvincible = false;
 		for (int i = 0; i < bodyMaterials.Length; i++)
 		{
 			bodyMaterials[i].color = startColors[i];
