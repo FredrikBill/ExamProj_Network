@@ -9,7 +9,18 @@ public class PlayerController : PlayerBase {
 	//Also currently takes care of animations
 
 	[SerializeField]
-	private float invincibilityTime = 2f;
+	private AnimationCurve hurtCurve;
+
+	[SerializeField]
+	private Color hurtColor;
+
+	private float invincibilityTime
+	{
+		get
+		{
+			return hurtCurve.keys[hurtCurve.keys.Length - 1].time;
+		}
+	}
 	private float timer;
 
 	private Hammer myHammer;
@@ -79,7 +90,12 @@ public class PlayerController : PlayerBase {
 	//Not tested at all, going to be used as visual cue for taking damage
 	private IEnumerator InvincibilityFlicker()
 	{
-		Material[] bodyMaterials = GetComponentsInChildren<Material>();
+		MeshRenderer[] meshRends = GetComponentsInChildren<MeshRenderer>();
+		Material[] bodyMaterials = new Material[meshRends.Length];
+		for (int i = 0; i < meshRends.Length; i++)
+		{
+			bodyMaterials[i] = meshRends[i].material;
+		}
 		Color[] startColors = new Color[bodyMaterials.Length];
 		Color[] targetColors = new Color[bodyMaterials.Length];
 		for (int i = 0; i < bodyMaterials.Length; i++)
@@ -89,16 +105,14 @@ public class PlayerController : PlayerBase {
 			targetColors[i].a = 0;
 		}
 		float timer  = 0;
-		float inTime = invincibilityTime;
-		float currentValue;
 
 		while(timer <= invincibilityTime)
 		{
-			currentValue = timer / inTime;
-			currentValue = Mathf.Sin(currentValue * Mathf.PI * .5f);
+			timer += Time.deltaTime;
+
 			for (int i = 0; i < bodyMaterials.Length; i++)
 			{
-				bodyMaterials[i].color = Color.Lerp(startColors[i], targetColors[i], currentValue);
+				bodyMaterials[i].color = Color.Lerp(startColors[i], hurtColor, hurtCurve.Evaluate(timer));
 			}
 			yield return new WaitForEndOfFrame();
 		}
