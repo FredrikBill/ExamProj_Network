@@ -1,0 +1,37 @@
+///
+AUDIO CLIPS
+///
+
+FREQUENTLY PLAYED SHORT CLIPS:
+Decompress On Load
+PCM
+
+FREQUENTLY PLAYED MEDIUM CLIPS:
+Compressed In Memory
+ADPCM
+
+RARELY PLAYED SHORT CLIPS
+Compressed In Memory
+ADPCM
+
+RARELY PLAYED MEDIUM CLIPS
+Compressed In Memory
+Vorbis
+
+///
+MUSIC AND AMBIANCE
+///
+
+LOW MEMORY, HIGHER CPU COST
+Streaming
+Vorbis
+
+LOW CPU, HIGHER MEMORY COST
+Compressed In Memory
+Vorbis
+Quality ~70%
+This method can cost alot of CPU power if used 2 or more at the same time
+
+
+source:
+http://blog.theknightsofunity.com/wrong-import-settings-killing-unity-game-part-2/
