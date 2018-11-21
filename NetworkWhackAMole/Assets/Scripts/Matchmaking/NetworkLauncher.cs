@@ -45,6 +45,7 @@ public class NetworkLauncher : Photon.PunBehaviour
 		playButton.SetActive(true);
 		cancelButton.SetActive(false);
 		readyChecker.gameObject.SetActive(false);
+		PhotonNetwork.sendRate = 64;
 	}
 
 	public void Connect()
@@ -92,9 +93,10 @@ public class NetworkLauncher : Photon.PunBehaviour
 
 	public override void OnJoinedRoom()
 	{
-		connectionText.enabled = false;
+		connectionText.text = "Looking for players...";
 		if (PhotonNetwork.room.PlayerCount >= 2)
 		{
+			connectionText.enabled = false;
 			ShowReadyCheck();
 		}
 	}

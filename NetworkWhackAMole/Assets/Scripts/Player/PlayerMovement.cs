@@ -23,6 +23,7 @@ public class PlayerMovement : PlayerBase {
 	private float gravity = -9.81f;
 	private bool isMoving;
 	public bool IsMoving { get { return isMoving; } }
+	private Vector3 prevPosition;
 	private float footstepTimer;
 	[SerializeField]
 	private float footStepRate = 2.3f;
@@ -40,6 +41,11 @@ public class PlayerMovement : PlayerBase {
 	private float turnSmoothTime = 0.1f;
 	private float turnSmoothVel;
 
+	//Network variables
+	private Vector3 networkPosition;
+	private Quaternion networkRotation;
+	private Vector3 networkMovement;
+
 	private void Awake()
 	{
 		footstepAudioSource = GetComponent<AudioSource>();
@@ -52,8 +58,15 @@ public class PlayerMovement : PlayerBase {
 			ProcessRotation();
 			ProcessMovement();
 		}
+		else
+		{
+			transform.position = Vector3.MoveTowards(transform.position, networkPosition, Time.deltaTime * moveSpeed);
+			transform.rotation = Quaternion.RotateTowards(transform.rotation, networkRotation, Time.deltaTime * 500);
+		}
 
-			ProcessFootsteps();
+		ProcessFootsteps();
+		prevPosition = transform.position;
+
 	}
 
 	private void ProcessRotation()
@@ -103,11 +116,16 @@ public class PlayerMovement : PlayerBase {
 	{
 		if (stream.isWriting)
 		{
-
+			stream.SendNext(transform.position);
+			stream.SendNext(transform.rotation);
 		}
 		else
 		{
+			networkPosition = (Vector3)stream.ReceiveNext();
+			networkRotation = (Quaternion)stream.ReceiveNext();
 
+			networkMovement = transform.position - prevPosition;
+			networkPosition += (networkMovement * lag);
 		}
 	}
 }
