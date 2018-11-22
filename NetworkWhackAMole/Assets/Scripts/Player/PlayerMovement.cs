@@ -6,13 +6,10 @@ public class PlayerMovement : PlayerBase {
 
 	//Handles movement & rotation for the player 
 
-
 	[Header("Movement")]
 
 	[SerializeField]
 	private float moveSpeed = 2;
-	[SerializeField]
-	private float stunnedMoveSpeed = 1;
 	[SerializeField]
 	private AnimationCurve accelCurve;
 	[SerializeField]
@@ -23,7 +20,6 @@ public class PlayerMovement : PlayerBase {
 	private float gravity = -9.81f;
 	private bool isMoving;
 	public bool IsMoving { get { return isMoving; } }
-	private Vector3 prevPosition;
 	private float footstepTimer;
 	private bool canMove = true;
 	[SerializeField]
@@ -34,7 +30,6 @@ public class PlayerMovement : PlayerBase {
 	[HideInInspector]
 	public float targetSpeed;
 	public float MoveSpeed { get { return moveSpeed; } }
-	public float StunnedMoveSpeed { get { return stunnedMoveSpeed; } }
 
 	[Header("Rotation")]
 
@@ -48,10 +43,10 @@ public class PlayerMovement : PlayerBase {
 	private Vector3 networkMovement;
 	private float networkSpeed;
 
-	float lastNetworkDataRecievedTime;
-	float pingInSeconds;
-	float timeSinceLastUpdate;
-	float totalTimePassed;
+	private float lastNetworkDataRecievedTime;
+	private float pingInSeconds;
+	private float timeSinceLastUpdate;
+	private float totalTimePassed;
 
 	private void Awake()
 	{
@@ -67,26 +62,10 @@ public class PlayerMovement : PlayerBase {
 		}
 		else
 		{
-			pingInSeconds = (float)PhotonNetwork.GetPing() * 0.001f;
-			timeSinceLastUpdate = (float)(PhotonNetwork.time - lastNetworkDataRecievedTime);
-			totalTimePassed = pingInSeconds + timeSinceLastUpdate;
-
-			Vector3 exterpolatedTargetPosition = networkPosition + (((networkPosition - transform.position).normalized * networkSpeed) * totalTimePassed);
-			Vector3 newPosition = Vector3.MoveTowards(transform.position, exterpolatedTargetPosition, networkSpeed * Time.deltaTime);
-
-			if (Vector3.Distance(transform.position, exterpolatedTargetPosition) >= 2f)
-				newPosition = exterpolatedTargetPosition;
-
-			//newPosition.y = Mathf.Clamp(newPosition.y, .5f, 50f);
-
-			transform.position = newPosition;
-
-			transform.rotation = Quaternion.RotateTowards(transform.rotation, networkRotation, Time.deltaTime * 500f);
+			ProcessNetworkMovement();
 		}
 
 		ProcessFootsteps();
-		prevPosition = transform.position;
-
 	}
 
 	private void ProcessRotation()
@@ -119,12 +98,11 @@ public class PlayerMovement : PlayerBase {
 			PAnimator.SetBool("IsMoving", false);
 		}
 
-
-
 		isMoving = PAnimator.GetBool("IsMoving");
 
 		runTimer = Mathf.Clamp01(runTimer);
 
+		//evaluate what our speed is according to the acceleration curve
 		currentSpeed = accelCurve.Evaluate(runTimer) * moveSpeed;
 
 		velocity = (transform.forward * currentSpeed);
@@ -133,8 +111,28 @@ public class PlayerMovement : PlayerBase {
 		CharController.Move(velocity * Time.deltaTime);
 	}
 
+	private void ProcessNetworkMovement()
+	{
+		pingInSeconds = (float)PhotonNetwork.GetPing() * 0.001f;
+		timeSinceLastUpdate = (float)(PhotonNetwork.time - lastNetworkDataRecievedTime);
+		totalTimePassed = pingInSeconds + timeSinceLastUpdate;
+
+		Vector3 exterpolatedTargetPosition = networkPosition + (((networkPosition - transform.position).normalized * networkSpeed) * totalTimePassed);
+		Vector3 newPosition = Vector3.MoveTowards(transform.position, exterpolatedTargetPosition, networkSpeed * Time.deltaTime);
+
+		//if distance is too far, then we go immediately to the predicted position
+		if (Vector3.Distance(transform.position, exterpolatedTargetPosition) >= 2f)
+			newPosition = exterpolatedTargetPosition;
+
+		transform.position = newPosition;
+
+		//rotation
+		transform.rotation = Quaternion.RotateTowards(transform.rotation, networkRotation, Time.deltaTime * 500f);
+	}
+
 	private void ProcessFootsteps()
 	{
+		//TODO make footsteps work over network, mainly setting isMoving to true
 		if (Time.time > footstepTimer && isMoving)
 		{
 			footstepTimer = Time.time + 1 / footStepRate;
@@ -144,6 +142,10 @@ public class PlayerMovement : PlayerBase {
 		}
 	}
 
+	/// <summary>
+	/// Sets if the player should be able to move or not
+	/// </summary>
+	/// <param name="active"></param>
 	public void SetMovementEnabled(bool active)
 	{
 		canMove = active;
@@ -164,6 +166,7 @@ public class PlayerMovement : PlayerBase {
 			networkSpeed = (float)stream.ReceiveNext();
 
 			lastNetworkDataRecievedTime = (float)info.timestamp;
+
 			//networkMovement = transform.position - prevPosition;
 			//networkPosition += (networkMovement * lag);
 		}

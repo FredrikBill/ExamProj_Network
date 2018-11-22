@@ -106,6 +106,7 @@ public class PlayerController : PlayerBase {
 			}
 			yield return new WaitForEndOfFrame();
 		}
+		//time is up, reset materials
 		isInvincible = false;
 		for (int i = 0; i < bodyMaterials.Length; i++)
 		{
