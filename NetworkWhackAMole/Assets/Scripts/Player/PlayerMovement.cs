@@ -25,6 +25,7 @@ public class PlayerMovement : PlayerBase {
 	public bool IsMoving { get { return isMoving; } }
 	private Vector3 prevPosition;
 	private float footstepTimer;
+	private bool canMove = true;
 	[SerializeField]
 	private float footStepRate = 2.3f;
 
@@ -99,16 +100,26 @@ public class PlayerMovement : PlayerBase {
 
 	private void ProcessMovement()
 	{
-		if (PInput.InputDir != Vector2.zero)
+		if(canMove)
 		{
-			runTimer += Time.deltaTime;
-			PAnimator.SetBool("IsMoving", true);
+			if (PInput.InputDir != Vector2.zero)
+			{
+				runTimer += Time.deltaTime;
+				PAnimator.SetBool("IsMoving", true);
+			}
+			else
+			{
+				runTimer -= Time.deltaTime * deaccelFactor;
+				PAnimator.SetBool("IsMoving", false);
+			}
 		}
 		else
 		{
-			runTimer -= Time.deltaTime * deaccelFactor;
+			runTimer = 0;
 			PAnimator.SetBool("IsMoving", false);
 		}
+
+
 
 		isMoving = PAnimator.GetBool("IsMoving");
 
@@ -127,8 +138,15 @@ public class PlayerMovement : PlayerBase {
 		if (Time.time > footstepTimer && isMoving)
 		{
 			footstepTimer = Time.time + 1 / footStepRate;
+			footstepAudioSource.pitch = Random.Range(.9f, 1.1f);
+			footstepAudioSource.volume = Random.Range(.85f, .9f);
 			footstepAudioSource.Play();
 		}
+	}
+
+	public void SetMovementEnabled(bool active)
+	{
+		canMove = active;
 	}
 
 	public override void SerializeState(PhotonStream stream, PhotonMessageInfo info)

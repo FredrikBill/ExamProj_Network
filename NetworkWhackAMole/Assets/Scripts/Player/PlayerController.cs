@@ -33,8 +33,11 @@ public class PlayerController : PlayerBase {
 
 	private void Awake()
 	{
-		if (localPlayer == null)
-			localPlayer = this;
+		if(photonView.isMine)
+		{
+			if (localPlayer == null)
+				localPlayer = this;
+		}
 
 		myHammer = GetComponentInChildren<Hammer>();
 	}
@@ -65,8 +68,10 @@ public class PlayerController : PlayerBase {
 	public void Whacked()
 	{
 		isInvincible = true;
-		PMovement.targetSpeed = PMovement.StunnedMoveSpeed;
+		PAnimator.SetBool("KnockedDown", true);
+
 		StartCoroutine("InvincibilityFlicker");
+		StartCoroutine("ResetKnockedDown");
 	}
 
 	//Not tested at all, going to be used as visual cue for taking damage
@@ -89,7 +94,6 @@ public class PlayerController : PlayerBase {
 
 		float timer = 0;
 		isInvincible = true;
-		PAnimator.SetBool("Whacked", false);
 
 		//Start blinking, time is determined by the last keyframe from the hurtCurve
 		while (timer <= invincibilityTime)
@@ -107,5 +111,18 @@ public class PlayerController : PlayerBase {
 		{
 			bodyMaterials[i].color = startColors[i];
 		}
+	}
+
+	private IEnumerator ResetKnockedDown()
+	{
+		float timer = 0;
+		float inTime = .5f;
+		while(timer <= inTime)
+		{
+			timer += Time.deltaTime;
+			yield return new WaitForEndOfFrame();
+		}
+
+		PAnimator.SetBool("KnockedDown", false);
 	}
 }
