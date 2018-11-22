@@ -33,6 +33,9 @@ public class PlayerController : PlayerBase {
 
 	private void Awake()
 	{
+		if (localPlayer == null)
+			localPlayer = this;
+
 		myHammer = GetComponentInChildren<Hammer>();
 	}
 

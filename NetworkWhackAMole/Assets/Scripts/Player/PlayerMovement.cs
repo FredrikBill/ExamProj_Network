@@ -45,6 +45,12 @@ public class PlayerMovement : PlayerBase {
 	private Vector3 networkPosition;
 	private Quaternion networkRotation;
 	private Vector3 networkMovement;
+	private float networkSpeed;
+
+	float lastNetworkDataRecievedTime;
+	float pingInSeconds;
+	float timeSinceLastUpdate;
+	float totalTimePassed;
 
 	private void Awake()
 	{
@@ -60,20 +66,21 @@ public class PlayerMovement : PlayerBase {
 		}
 		else
 		{
-			float pingInSeconds = (float)PhotonNetwork.GetPing() * 0.001f;
-			float timeSinceLastUpdate = (float)(PhotonNetwork.time - lastNetworkDataRecievedTime);
-			float totalTimePassed = pingInSeconds + timeSinceLastUpdate;
+			pingInSeconds = (float)PhotonNetwork.GetPing() * 0.001f;
+			timeSinceLastUpdate = (float)(PhotonNetwork.time - lastNetworkDataRecievedTime);
+			totalTimePassed = pingInSeconds + timeSinceLastUpdate;
 
-			Vector3 exterpolatedTargetPosition = networkPosition + transform.forward * moveSpeed * totalTimePassed;
-			Vector3 newPosition = Vector3.MoveTowards(transform.position, exterpolatedTargetPosition, moveSpeed * Time.deltaTime);
+			Vector3 exterpolatedTargetPosition = networkPosition + (((networkPosition - transform.position).normalized * networkSpeed) * totalTimePassed);
+			Vector3 newPosition = Vector3.MoveTowards(transform.position, exterpolatedTargetPosition, networkSpeed * Time.deltaTime);
 
 			if (Vector3.Distance(transform.position, exterpolatedTargetPosition) >= 2f)
 				newPosition = exterpolatedTargetPosition;
 
+			//newPosition.y = Mathf.Clamp(newPosition.y, .5f, 50f);
+
 			transform.position = newPosition;
 
-			//transform.position = Vector3.MoveTowards(transform.position, networkPosition, Time.deltaTime * moveSpeed);
-			transform.rotation = Quaternion.RotateTowards(transform.rotation, networkRotation, Time.deltaTime * 500);
+			transform.rotation = Quaternion.RotateTowards(transform.rotation, networkRotation, Time.deltaTime * 500f);
 		}
 
 		ProcessFootsteps();
@@ -130,14 +137,17 @@ public class PlayerMovement : PlayerBase {
 		{
 			stream.SendNext(transform.position);
 			stream.SendNext(transform.rotation);
+			stream.SendNext(currentSpeed);
 		}
 		else
 		{
 			networkPosition = (Vector3)stream.ReceiveNext();
 			networkRotation = (Quaternion)stream.ReceiveNext();
+			networkSpeed = (float)stream.ReceiveNext();
 
-			networkMovement = transform.position - prevPosition;
-			networkPosition += (networkMovement * lag);
+			lastNetworkDataRecievedTime = (float)info.timestamp;
+			//networkMovement = transform.position - prevPosition;
+			//networkPosition += (networkMovement * lag);
 		}
 	}
 }

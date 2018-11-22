@@ -46,6 +46,7 @@ public class NetworkLauncher : Photon.PunBehaviour
 		cancelButton.SetActive(false);
 		readyChecker.gameObject.SetActive(false);
 		PhotonNetwork.sendRate = 64;
+		PhotonNetwork.sendRateOnSerialize = 64;
 	}
 
 	public void Connect()

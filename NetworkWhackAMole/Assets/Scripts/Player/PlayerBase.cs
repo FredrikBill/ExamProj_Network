@@ -8,6 +8,15 @@ public class PlayerBase : Photon.MonoBehaviour, IPunObservable {
 	//Contains references to all other components.
 	//Also calls on OnPhotonSerialize on the inherited components.
 
+	protected static PlayerController localPlayer;
+	public static PlayerController LocalPlayer
+	{
+		get
+		{
+			return localPlayer;
+		}
+	}
+
 	private CharacterController charController;
 	public CharacterController CharController
 	{
@@ -92,13 +101,13 @@ public class PlayerBase : Photon.MonoBehaviour, IPunObservable {
 		}
 	}
 
-	protected float lag;
-	protected float lastNetworkDataRecievedTime;
+	//protected float lag;
+	//protected float lastNetworkDataRecievedTime;
 
 	public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
 	{
-		lag = Mathf.Abs((float)(PhotonNetwork.time - info.timestamp));
-		lastNetworkDataRecievedTime = (float)info.timestamp;
+		//lag = Mathf.Abs((float)(PhotonNetwork.time - info.timestamp));
+		//lastNetworkDataRecievedTime = (float)info.timestamp;
 		PMovement.SerializeState(stream, info);
 		PController.SerializeState(stream, info);
 	}
