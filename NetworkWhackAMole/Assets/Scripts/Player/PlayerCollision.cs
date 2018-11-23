@@ -23,7 +23,7 @@ public class PlayerCollision : PlayerBase {
 		if(other.tag == "Hammer" && PController.IsInvincible == false && other.transform.root != transform)
 		{
 			Debug.Log("Got hit");
-			PController.Whacked();
+			PController.Whacked(other);
 		}
 	}
 }

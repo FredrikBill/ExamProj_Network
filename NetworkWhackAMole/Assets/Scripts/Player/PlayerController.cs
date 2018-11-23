@@ -45,7 +45,12 @@ public class PlayerController : PlayerBase {
 	private void Update()
 	{
 		if(photonView.isMine)
-			PAnimator.SetBool("Whack", PInput.WhackButton);
+		{
+			if(PInput.WhackButton)
+			{
+				PAnimator.SetBool("Whack", true);
+			}
+		}
 	}
 
 	public void EnableHammerHitbox()
@@ -65,13 +70,18 @@ public class PlayerController : PlayerBase {
 	/// <summary>
 	/// Makes the character take damage, becoming invincible and slowed down
 	/// </summary>
-	public void Whacked()
+	public void Whacked(Collider other)
 	{
 		isInvincible = true;
 		PAnimator.SetBool("KnockedDown", true);
 
+		Vector3 otherPos = other.transform.position;
+		Vector3 direction = (transform.position - otherPos).normalized;
+		direction.y = 0;
+
 		StartCoroutine("InvincibilityFlicker");
 		StartCoroutine("ResetKnockedDown");
+		//StartCoroutine("KnockAway", direction);
 	}
 
 	//Not tested at all, going to be used as visual cue for taking damage
@@ -111,6 +121,21 @@ public class PlayerController : PlayerBase {
 		for (int i = 0; i < bodyMaterials.Length; i++)
 		{
 			bodyMaterials[i].color = startColors[i];
+		}
+	}
+
+	private IEnumerator KnockAway(Vector3 dir)
+	{
+		float timer = 0;
+		float inTime = .5f;
+		Vector3 startPos = transform.position;
+		float distance = 2f;
+		Vector3 endPos = transform.position + (dir * distance);
+		while(timer <= inTime)
+		{
+			timer += Time.deltaTime;
+			transform.position = Vector3.Lerp(startPos, endPos, timer / inTime);
+			yield return new WaitForEndOfFrame();
 		}
 	}
 
