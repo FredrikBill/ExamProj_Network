@@ -24,7 +24,7 @@ public class MoleBase : MonoBehaviour {
 		targetHole = hole;
 	}
 
-	public virtual void Whacked()
+	public virtual void Whacked(PlayerController player)
 	{
 
 	}

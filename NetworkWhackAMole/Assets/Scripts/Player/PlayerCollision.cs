@@ -17,13 +17,13 @@ public class PlayerCollision : PlayerBase {
 		//	PController.Whacked();
 		//}
 
-		print(gameObject.name + " collided with: " + other.gameObject.name);
+		//print(gameObject.name + " collided with: " + other.gameObject.name);
 
-		//check if it's a hammer, if we aren't invincible and the hammer doesn't belong to us
-		if(other.tag == "Hammer" && PController.IsInvincible == false && other.transform.root != transform)
-		{
-			Debug.Log("Got hit");
-			PController.Whacked(other);
-		}
+		////check if it's a hammer, if we aren't invincible and the hammer doesn't belong to us
+		//if(other.tag == "Hammer" && PController.IsInvincible == false && other.transform.root != transform)
+		//{
+		//	Debug.Log("Got hit");
+		//	PController.Whacked();
+		//}
 	}
 }

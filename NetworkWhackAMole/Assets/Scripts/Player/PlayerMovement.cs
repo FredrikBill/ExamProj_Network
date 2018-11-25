@@ -70,10 +70,13 @@ public class PlayerMovement : PlayerBase {
 
 	private void ProcessRotation()
 	{
-		if (PInput.InputDir != Vector2.zero)
+		if(canMove)
 		{
-			float targetRot = Mathf.Atan2(PInput.InputDir.x, PInput.InputDir.y) * Mathf.Rad2Deg;
-			transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRot, ref turnSmoothVel, turnSmoothTime);
+			if (PInput.InputDir != Vector2.zero)
+			{
+				float targetRot = Mathf.Atan2(PInput.InputDir.x, PInput.InputDir.y) * Mathf.Rad2Deg;
+				transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRot, ref turnSmoothVel, turnSmoothTime);
+			}
 		}
 	}
 

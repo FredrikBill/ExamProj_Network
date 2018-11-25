@@ -51,5 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ab3226b2f61d6d459b68d77c54eb602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOnline: 1
   playerPrefab: {fileID: 1648251509865208, guid: 85d8e5ad1b442ce45963c57a17304ca9,
+    type: 2}
+  playerUiPrefab: {fileID: 1993114388162196, guid: 9a3edee7d78269941877e2a9e29b1fe1,
     type: 2}

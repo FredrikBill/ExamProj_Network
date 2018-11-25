@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 33265444374267950}
   - component: {fileID: 23210642102137614}
   - component: {fileID: 65936683957255980}
+  - component: {fileID: 114225201044198064}
   m_Layer: 0
   m_Name: HammerHead
   m_TagString: Hammer
@@ -54,7 +55,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4172471004700244}
-  - component: {fileID: 114681649566703296}
   m_Layer: 0
   m_Name: Hammer
   m_TagString: Hammer
@@ -537,6 +537,17 @@ MonoBehaviour:
   footStepRate: 2.3
   targetSpeed: 0
   turnSmoothTime: 0.1
+--- !u!114 &114225201044198064
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1209111054854752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d1573e355108d148a946f917b62d361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114324349706005608
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -739,17 +750,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   hurtColor: {r: 1, g: 1, b: 1, a: 0}
   hammerCol: {fileID: 65936683957255980}
---- !u!114 &114681649566703296
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1515647074583442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d1573e355108d148a946f917b62d361, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114832476617676718
 MonoBehaviour:
   m_ObjectHideFlags: 1

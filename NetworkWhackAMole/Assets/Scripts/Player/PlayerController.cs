@@ -70,14 +70,14 @@ public class PlayerController : PlayerBase {
 	/// <summary>
 	/// Makes the character take damage, becoming invincible and slowed down
 	/// </summary>
-	public void Whacked(Collider other)
+	public void Whacked()
 	{
 		isInvincible = true;
 		PAnimator.SetBool("KnockedDown", true);
 
-		Vector3 otherPos = other.transform.position;
-		Vector3 direction = (transform.position - otherPos).normalized;
-		direction.y = 0;
+		//Vector3 otherPos = other.transform.position;
+		//Vector3 direction = (transform.position - otherPos).normalized;
+		//direction.y = 0;
 
 		StartCoroutine("InvincibilityFlicker");
 		StartCoroutine("ResetKnockedDown");

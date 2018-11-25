@@ -9,7 +9,25 @@ public class Hammer : MonoBehaviour {
 
 	private void Awake()
 	{
-		col = GetComponentInChildren<Collider>();
+		col = GetComponent<Collider>();
+		col.isTrigger = true;
 		col.enabled = false;
+	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if(other.GetComponent<PlayerBase>())
+		{
+			PlayerBase player = other.GetComponent<PlayerBase>();
+			if (player.PController.IsInvincible == false && other.transform != transform.root)
+			{
+				player.PController.Whacked();
+			}
+		}
+		else if(other.GetComponent<MoleBase>())
+		{
+			MoleBase mole = other.GetComponent<MoleBase>();
+			mole.Whacked(transform.root.GetComponent<PlayerController>());
+		}
 	}
 }

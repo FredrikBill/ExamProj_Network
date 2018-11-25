@@ -16,9 +16,9 @@ public class BigMole : MoleBase {
 		previousHole = targetHole;
 	}
 
-	public override void Whacked()
+	public override void Whacked(PlayerController player)
 	{
-
+		//send player ui an message to increase their score
 	}
 
 }
