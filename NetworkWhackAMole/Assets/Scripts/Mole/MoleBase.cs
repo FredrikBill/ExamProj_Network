@@ -13,10 +13,13 @@ public class MoleBase : MonoBehaviour {
 
 	private void Awake()
 	{
+		animator = GetComponent<Animator>();
+		//set spawn position and rotate to face the camera
 		spawnPos = transform.position;
+		transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+		//subscribe to events
 		MoleManager.Instance.onRaiseMoles += RiseUp;
 		MoleManager.Instance.onRetractMoles += Retract;
-		animator = GetComponent<Animator>();
 	}
 
 	public virtual void SetTargetHole(Transform hole)
@@ -39,5 +42,10 @@ public class MoleBase : MonoBehaviour {
 	public void Retract()
 	{
 		animator.SetBool("Retract", true);
+	}
+
+	public virtual void Reset()
+	{
+
 	}
 }

@@ -36,7 +36,6 @@ public class CameraFollower : MonoBehaviour {
 
 	private void SetTarget()
 	{
-		print("it happen");
 		target = PlayerController.LocalPlayer.transform;
 		if (target.GetComponent<CharacterController>())
 			playerHalfHeight = target.GetComponent<CharacterController>().height / 2;

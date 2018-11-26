@@ -57,14 +57,12 @@ public class PlayerController : PlayerBase {
 	{
 		//myHammer.Col.enabled = true;
 		hammerCol.enabled = true;
-		print(hammerCol.enabled);
 	}
 
 	public void DisableHammerHitbox()
 	{
 		//myHammer.Col.enabled = false;
 		hammerCol.enabled = false;
-		print(hammerCol.enabled);
 	}
 
 	/// <summary>

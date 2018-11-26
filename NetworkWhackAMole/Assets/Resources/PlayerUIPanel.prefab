@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 114799386442361200}
   - component: {fileID: 114105648146647830}
   - component: {fileID: 114146002846583826}
+  - component: {fileID: 114118440141080040}
   m_Layer: 5
   m_Name: PlayerUIPanel
   m_TagString: Untagged
@@ -83,6 +84,32 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &114118440141080040
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1993114388162196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  OwnerShipWasTransfered: 0
+  prefixBackup: -1
+  synchronization: 3
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 114146002846583826}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 0
+  instantiationId: -1
+  currentMasterID: -1
+  isRuntimeInstantiated: 0
 --- !u!114 &114146002846583826
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -94,6 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0823861ec07c8e24c8c519a2f0273cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameText: {fileID: 114294229811607156}
+  scoreText: {fileID: 114479097010319212}
 --- !u!114 &114294229811607156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -385,7 +414,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 439, y: -50}
+  m_AnchoredPosition: {x: 434.5, y: -50}
   m_SizeDelta: {x: 150, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224264245418400600

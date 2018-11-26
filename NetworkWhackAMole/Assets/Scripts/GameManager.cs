@@ -19,6 +19,9 @@ public class GameManager : Photon.MonoBehaviour{
 	public delegate void OnPlayerSpawned();
 	public OnPlayerSpawned onPlayerSpawned;
 
+	public delegate void OnStartGame();
+	public OnStartGame onStartGame;
+
 	private void Awake()
 	{
 		if (instance == null)
@@ -31,7 +34,28 @@ public class GameManager : Photon.MonoBehaviour{
 
 	private void Start()
 	{
-		if(playerPrefab != null)
+		SpawnPlayer();
+		//Run some kind of intro
+		if(PhotonNetwork.offlineMode)
+		{
+			StartGame();
+		}
+		else if(PhotonNetwork.isMasterClient)
+		{
+			StartGame();
+		}
+
+	}
+
+	private void StartGame()
+	{
+		if (onStartGame != null)
+			onStartGame.Invoke();
+	}
+
+	private void SpawnPlayer()
+	{
+		if (playerPrefab != null)
 		{
 			if (isOnline)
 			{

@@ -9,6 +9,9 @@ public class BigMole : MoleBase {
 	private Transform previousHole;
 	public Transform PreviousHole { get { return previousHole; } }
 
+	[SerializeField]
+	private int scorePerHit = 2;
+
 	public override void SetTargetHole(Transform hole)
 	{
 		targetHole = hole;
@@ -18,7 +21,12 @@ public class BigMole : MoleBase {
 
 	public override void Whacked(PlayerController player)
 	{
-		//send player ui an message to increase their score
+		if(player.photonView.isMine)
+		{
+			//send player ui an message to increase their score
+			PlayerUI.LocalPlayerUi.IncreaseScore(scorePerHit);
+			animator.SetBool("Whacked", true);
+		}
 	}
 
 }

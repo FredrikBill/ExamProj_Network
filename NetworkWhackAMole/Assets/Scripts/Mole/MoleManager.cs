@@ -7,16 +7,30 @@ public class MoleManager : MonoBehaviour {
 	private static MoleManager instance;
 	public static MoleManager Instance { get { return instance; } }
 
+	[Header("Mole Prefabs")]
+	[SerializeField]
+	private GameObject bigMolePrefab;
+	[SerializeField]
+	private GameObject dynamiteMolePrefab;
+
+	[Header("Settings")]
+
 	[SerializeField, Tooltip("The point off screen where the moles will spawn")]
 	private Transform moleSpawnPoint;
+	public Transform MoleSpawnPoint { get { return moleSpawnPoint; } }
 	[SerializeField, Tooltip("The holes from which the moles will appear from")]
 	private Transform[] moleHoles;
 
 	private BigMole bigMole;
-	private DynamiteMole[] dynamiteMoles;
-	[SerializeField, Tooltip("The max amount of dynamite moles spawned")]
+	private List<DynamiteMole> dynamiteMoles = new List<DynamiteMole>();
+	//private DynamiteMole[] dynamiteMoles;
+	[SerializeField, Tooltip("The max amount of dynamite moles spawned"), Range(0, 6)]
 	private int dynamiteMolesAmount;
 	private int activeDynamiteMolesAmount = 1;
+	[SerializeField]
+	private float timeBetweenRounds = 10;
+
+	private IEnumerator retractTimer;
 
 	public delegate void OnRaiseMoles();
 	public OnRaiseMoles onRaiseMoles;
@@ -26,35 +40,58 @@ public class MoleManager : MonoBehaviour {
 
 	private void Awake()
 	{
-		if(PhotonNetwork.isMasterClient)
+		if(PhotonNetwork.offlineMode)
 		{
 			if (instance == null)
 				instance = this;
 			else
 				Destroy(gameObject);
 
-			//Spawn and set reference to the big mole
-			bigMole = PhotonNetwork.Instantiate("BigMole", moleSpawnPoint.position, Quaternion.identity, 0).GetComponent<BigMole>();
+			GameManager.Instance.onStartGame += RaiseMoles;
 
-			//Spawn the dynamite moles and add them to the array
+			bigMole = Instantiate(bigMolePrefab, moleSpawnPoint.position, Quaternion.identity).GetComponent<BigMole>();
 			for (int i = 0; i < dynamiteMolesAmount; i++)
 			{
-				GameObject go = PhotonNetwork.Instantiate("DynamiteMole", moleSpawnPoint.position, Quaternion.identity, 0);
-				dynamiteMoles[i] = go.GetComponent<DynamiteMole>();
+				GameObject go = Instantiate(dynamiteMolePrefab, moleSpawnPoint.position, Quaternion.identity);
+				dynamiteMoles.Add(go.GetComponent<DynamiteMole>());
 			}
 		}
+		//Network spawning
+		else
+		{
+			if (PhotonNetwork.isMasterClient)
+			{
+				if (instance == null)
+					instance = this;
+				else
+					Destroy(gameObject);
+
+				GameManager.Instance.onStartGame += RaiseMoles;
+
+				//Spawn and set reference to the big mole
+				bigMole = PhotonNetwork.Instantiate(bigMolePrefab.name, moleSpawnPoint.position, Quaternion.identity, 0).GetComponent<BigMole>();
+
+				//Spawn the dynamite moles and add them to the array
+				for (int i = 0; i < dynamiteMolesAmount; i++)
+				{
+					GameObject go = PhotonNetwork.Instantiate(dynamiteMolePrefab.name, moleSpawnPoint.position, Quaternion.identity, 0);
+					dynamiteMoles.Add(go.GetComponent<DynamiteMole>());
+				}
+			}
+		}
+
+		retractTimer = RetractTimer();
 	}
 
-	//TODO Should listen for the game manager to when it should raise and retract moles;
 	private void RaiseMoles()
 	{
 		SetMolesTargetHoles();
-
+		StartCoroutine(retractTimer);
 		if (onRaiseMoles != null)
 			onRaiseMoles.Invoke();
 		//for every time we raise the moles, we increase the amount of dynamite moles for the next time
 		activeDynamiteMolesAmount++;
-		activeDynamiteMolesAmount = Mathf.Clamp(activeDynamiteMolesAmount, 0, dynamiteMoles.Length);
+		activeDynamiteMolesAmount = Mathf.Clamp(activeDynamiteMolesAmount, 0, dynamiteMoles.Count);
 	}
 
 	/// <summary>
@@ -95,5 +132,32 @@ public class MoleManager : MonoBehaviour {
 	{
 		if (onRetractMoles != null)
 			onRetractMoles.Invoke();
+	}
+
+	private IEnumerator RetractTimer()
+	{
+		float timer = 0;
+		while(timer < timeBetweenRounds)
+		{
+			timer += Time.deltaTime;
+			yield return new WaitForEndOfFrame();
+		}
+		RetractMoles();
+		timer = 0;
+		while(timer < 1)
+		{
+			timer += Time.deltaTime;
+			yield return new WaitForEndOfFrame();
+		}
+		RaiseMoles();
+	}
+	
+	private void OnDrawGizmos()
+	{
+		Gizmos.color = Color.black;
+		for (int i = 0; i < moleHoles.Length; i++)
+		{
+			Gizmos.DrawWireSphere(moleHoles[i].position, 3);
+		}
 	}
 }
