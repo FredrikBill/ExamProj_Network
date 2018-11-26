@@ -79,13 +79,13 @@ public class MoleManager : MonoBehaviour {
 				}
 			}
 		}
-
-		retractTimer = RetractTimer();
 	}
 
 	private void RaiseMoles()
 	{
+		print("Starting to raise moles");
 		SetMolesTargetHoles();
+		retractTimer = RetractTimer();
 		StartCoroutine(retractTimer);
 		if (onRaiseMoles != null)
 			onRaiseMoles.Invoke();
@@ -136,6 +136,7 @@ public class MoleManager : MonoBehaviour {
 
 	private IEnumerator RetractTimer()
 	{
+		print("Rectract Timer started");
 		float timer = 0;
 		while(timer < timeBetweenRounds)
 		{
@@ -144,7 +145,7 @@ public class MoleManager : MonoBehaviour {
 		}
 		RetractMoles();
 		timer = 0;
-		while(timer < 1)
+		while(timer < .8f)
 		{
 			timer += Time.deltaTime;
 			yield return new WaitForEndOfFrame();
