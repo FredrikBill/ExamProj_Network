@@ -36,6 +36,9 @@ public class CameraFollower : MonoBehaviour {
 
 	private void SetTarget()
 	{
+		if (PlayerController.LocalPlayer == null)
+			return;
+
 		target = PlayerController.LocalPlayer.transform;
 		if (target.GetComponent<CharacterController>())
 			playerHalfHeight = target.GetComponent<CharacterController>().height / 2;
@@ -43,14 +46,16 @@ public class CameraFollower : MonoBehaviour {
 
 	private void Update()
 	{
-		if (target == null)
+		if (target == null && PlayerController.LocalPlayer != null)
 			target = PlayerController.LocalPlayer.transform;
 	}
 
 	private void LateUpdate()
 	{
-		relativePos = target.position - transform.position;
+		if (target == null)
+			return;
 
+		relativePos = target.position - transform.position;
 
 		targetPos = target.transform.position - (target.transform.forward * zoom) + (Vector3.up * cameraHeight) + positionOffset;
 
