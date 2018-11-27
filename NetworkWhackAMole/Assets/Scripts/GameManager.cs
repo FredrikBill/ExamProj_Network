@@ -44,7 +44,6 @@ public class GameManager : Photon.MonoBehaviour{
 		{
 			StartGame();
 		}
-
 	}
 
 	private void StartGame()

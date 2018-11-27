@@ -38,6 +38,10 @@ public class MoleBase : Photon.MonoBehaviour {
 
 	public void RiseUp()
 	{
+		//if target hole is null, mans that the manager hasn't given us one because we aren't supposed to go up yet.
+		if (targetHole == null)
+			return;
+
 		transform.position = targetHole.position;
 		col.enabled = true;
 		//Play animation
