@@ -79,6 +79,8 @@ public class MoleManager : MonoBehaviour {
 				}
 			}
 		}
+
+		bigMole.onBigMoleRetracted += RaiseMoles;
 	}
 
 	private void RaiseMoles()
@@ -136,7 +138,7 @@ public class MoleManager : MonoBehaviour {
 
 	private IEnumerator RetractTimer()
 	{
-		print("Rectract Timer started");
+		AnimatorStateInfo stateInfo = bigMole.Anim.GetCurrentAnimatorStateInfo(0);
 		float timer = 0;
 		while(timer < timeBetweenRounds)
 		{
@@ -145,12 +147,17 @@ public class MoleManager : MonoBehaviour {
 		}
 		RetractMoles();
 		timer = 0;
-		while(timer < .8f)
+		while (timer < .8f)
 		{
 			timer += Time.deltaTime;
 			yield return new WaitForEndOfFrame();
 		}
-		RaiseMoles();
+		//while (stateInfo.IsName("Base Layer.Retract") == false)
+		//{
+		//	stateInfo = bigMole.Anim.GetCurrentAnimatorStateInfo(0);
+		//	yield return new WaitForEndOfFrame();
+		//}
+		//RaiseMoles();
 	}
 	
 	private void OnDrawGizmos()

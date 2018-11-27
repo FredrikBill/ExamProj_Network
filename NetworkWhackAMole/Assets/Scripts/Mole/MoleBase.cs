@@ -2,18 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoleBase : MonoBehaviour {
+public class MoleBase : Photon.MonoBehaviour {
 
 	protected Transform targetHole;
 	public Transform TargetHole { get { return targetHole; } }
 
 	protected Vector3 spawnPos;
 
-	protected Animator animator;
+	protected Animator anim;
+	public Animator Anim { get { return anim; } }
+	protected Collider col;
 
 	private void Awake()
 	{
-		animator = GetComponent<Animator>();
+		//Get components
+		anim = GetComponent<Animator>();
+		col = GetComponent<Collider>();
 		//set spawn position and rotate to face the camera
 		spawnPos = transform.position;
 		transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
@@ -35,13 +39,16 @@ public class MoleBase : MonoBehaviour {
 	public void RiseUp()
 	{
 		transform.position = targetHole.position;
+		col.enabled = true;
 		//Play animation
-		animator.SetBool("RiseUp", true);
+		anim.SetBool("RiseUp", true);
 	}
 
 	public void Retract()
 	{
-		animator.SetBool("Retract", true);
+		//collision disabled so that you can't hit a mole while they are retracting
+		col.enabled = false;
+		anim.SetBool("Retract", true);
 	}
 
 	public virtual void Reset()

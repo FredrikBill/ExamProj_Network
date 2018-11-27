@@ -12,6 +12,9 @@ public class BigMole : MoleBase {
 	[SerializeField]
 	private int scorePerHit = 2;
 
+	public delegate void OnBigMoleRetracted();
+	public OnBigMoleRetracted onBigMoleRetracted;
+
 	public override void SetTargetHole(Transform hole)
 	{
 		targetHole = hole;
@@ -25,7 +28,16 @@ public class BigMole : MoleBase {
 		{
 			//send player ui an message to increase their score
 			PlayerUI.LocalPlayerUi.IncreaseScore(scorePerHit);
-			animator.SetBool("Whacked", true);
+
+			anim.SetTrigger("W");
+			//if(anim.GetBool("Whacked"))
+			//{
+			//	anim.Play("Whacked", 0);
+			//}
+			//else
+			//{
+			//	anim.SetBool("Whacked", true);
+			//}
 		}
 	}
 

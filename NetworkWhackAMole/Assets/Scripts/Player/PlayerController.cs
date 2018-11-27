@@ -66,7 +66,7 @@ public class PlayerController : PlayerBase {
 	}
 
 	/// <summary>
-	/// Makes the character take damage, becoming invincible and slowed down
+	/// Knocks the player down and become invincible for a short period of time
 	/// </summary>
 	public void Whacked()
 	{

@@ -8,15 +8,8 @@ public class DynamiteMole : MoleBase {
 
 	private bool isExploding;
 
-	private CapsuleCollider myCol;
-
 	[SerializeField]
 	private float explosionRadius = 9f;
-
-	private void Awake()
-	{
-		myCol = GetComponent<CapsuleCollider>();
-	}
 
 	public override void Whacked(PlayerController player)
 	{
