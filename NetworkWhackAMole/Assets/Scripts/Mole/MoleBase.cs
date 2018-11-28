@@ -13,11 +13,15 @@ public class MoleBase : Photon.MonoBehaviour {
 	public Animator Anim { get { return anim; } }
 	protected Collider col;
 
+	private HitStopPlayer hitStop;
+	public HitStopPlayer HitStop { get { return hitStop; } }
+
 	private void Awake()
 	{
 		//Get components
 		anim = GetComponent<Animator>();
 		col = GetComponent<Collider>();
+		hitStop = GetComponent<HitStopPlayer>();
 		//set spawn position and rotate to face the camera
 		spawnPos = transform.position;
 		transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
@@ -44,6 +48,7 @@ public class MoleBase : Photon.MonoBehaviour {
 
 		transform.position = targetHole.position;
 		col.enabled = true;
+		Reset();
 		//Play animation
 		anim.SetBool("RiseUp", true);
 	}
@@ -55,7 +60,7 @@ public class MoleBase : Photon.MonoBehaviour {
 		anim.SetBool("Retract", true);
 	}
 
-	public virtual void Reset()
+	protected virtual void Reset()
 	{
 
 	}

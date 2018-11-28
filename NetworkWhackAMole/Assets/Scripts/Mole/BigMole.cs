@@ -30,6 +30,7 @@ public class BigMole : MoleBase {
 			PlayerUI.LocalPlayerUi.IncreaseScore(scorePerHit);
 
 			anim.SetTrigger("W");
+			HitStop.PlayHitStop();
 			//if(anim.GetBool("Whacked"))
 			//{
 			//	anim.Play("Whacked", 0);

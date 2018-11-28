@@ -8,6 +8,16 @@ public class DynamiteMole : MoleBase {
 
 	private bool isExploding;
 
+	[Header("GameObjects")]
+
+	[SerializeField]
+	private GameObject explosionParticlePrefab;
+
+	[SerializeField]
+	private GameObject dynamiteFuseParticle;
+
+	[Header("Settings")]
+
 	[SerializeField]
 	private float explosionRadius = 9f;
 
@@ -23,7 +33,12 @@ public class DynamiteMole : MoleBase {
 	{
 		isExploding = true;
 
+		HitStop.PlayHitStop();
+
 		//Iterate through everything
+		if(explosionParticlePrefab !=  null)
+			Instantiate(explosionParticlePrefab, transform.position, Quaternion.identity);
+
 		Collider[] col = Physics.OverlapSphere(transform.position, explosionRadius);
 		for (int i = 0; i < col.Length; i++)
 		{
@@ -38,5 +53,10 @@ public class DynamiteMole : MoleBase {
 	{
 		Gizmos.color = Color.black;
 		Gizmos.DrawWireSphere(transform.position, explosionRadius);
+	}
+
+	protected override void Reset()
+	{
+		isExploding = false;
 	}
 }

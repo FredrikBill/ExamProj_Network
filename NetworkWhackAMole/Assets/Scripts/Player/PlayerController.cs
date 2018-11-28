@@ -25,6 +25,9 @@ public class PlayerController : PlayerBase {
 	private Hammer myHammer;
 	public Hammer MyHammer { get { return myHammer; } }
 
+	private HitStopPlayer hitStop;
+	public HitStopPlayer HitStop { get { return hitStop; } }
+
 	[SerializeField]
 	private Collider hammerCol;
 
@@ -40,6 +43,7 @@ public class PlayerController : PlayerBase {
 		}
 
 		myHammer = GetComponentInChildren<Hammer>();
+		hitStop = GetComponent<HitStopPlayer>();
 	}
 
 	private void Update()
@@ -72,10 +76,7 @@ public class PlayerController : PlayerBase {
 	{
 		isInvincible = true;
 		PAnimator.SetBool("KnockedDown", true);
-
-		//Vector3 otherPos = other.transform.position;
-		//Vector3 direction = (transform.position - otherPos).normalized;
-		//direction.y = 0;
+		hitStop.PlayHitStop();
 
 		StartCoroutine("InvincibilityFlicker");
 		StartCoroutine("ResetKnockedDown");
@@ -122,6 +123,7 @@ public class PlayerController : PlayerBase {
 		}
 	}
 
+	//OLD, might reimplement. meant to knock away the player from the source of impact
 	private IEnumerator KnockAway(Vector3 dir)
 	{
 		float timer = 0;
