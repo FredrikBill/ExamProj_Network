@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MoleBase : Photon.MonoBehaviour {
 
+	[SerializeField]
+	private GameObject dirtEffectPrefab;
+
 	protected Transform targetHole;
 	public Transform TargetHole { get { return targetHole; } }
 
@@ -51,6 +54,7 @@ public class MoleBase : Photon.MonoBehaviour {
 		Reset();
 		//Play animation
 		anim.SetBool("RiseUp", true);
+		Instantiate(dirtEffectPrefab, transform.position, Quaternion.identity);
 	}
 
 	public void Retract()
@@ -58,6 +62,7 @@ public class MoleBase : Photon.MonoBehaviour {
 		//collision disabled so that you can't hit a mole while they are retracting
 		col.enabled = false;
 		anim.SetBool("Retract", true);
+		Instantiate(dirtEffectPrefab, transform.position, Quaternion.identity);
 	}
 
 	protected virtual void Reset()

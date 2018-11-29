@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4957953855443092}
   - component: {fileID: 198438299291579290}
   - component: {fileID: 199859916040828110}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SphereParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 198009481632164618}
   - component: {fileID: 199779110033303522}
   - component: {fileID: 114892275018193784}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PS_HitEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 4086099556468372}
   - component: {fileID: 198193343026978486}
   - component: {fileID: 199293020807883918}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BeamLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13991,9 +13991,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1821791355
+  m_SortingLayer: 1
+  m_SortingOrder: 999
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -14048,9 +14048,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1821791355
+  m_SortingLayer: 1
+  m_SortingOrder: 999
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -14105,9 +14105,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1821791355
+  m_SortingLayer: 1
+  m_SortingOrder: 999
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0

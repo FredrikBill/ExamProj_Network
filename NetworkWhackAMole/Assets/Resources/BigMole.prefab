@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 136516861196485646}
   - component: {fileID: 114054419035807460}
   - component: {fileID: 54257034993609976}
+  - component: {fileID: 114457701897521302}
   - component: {fileID: 114061422521891516}
   - component: {fileID: 114293284796399754}
   - component: {fileID: 114677215027440152}
@@ -966,6 +967,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f526392551196d41a48816d4bb50f66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dirtEffectPrefab: {fileID: 1145690500443954, guid: 44d666af8cab9f14da40dea04ec66746,
+    type: 2}
   scorePerHit: 2
 --- !u!114 &114061422521891516
 MonoBehaviour:
@@ -1071,6 +1074,41 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+--- !u!114 &114457701897521302
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1349320603489736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f11f794707d9e64ab285e44cc68654f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitstopCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &114677215027440152
 MonoBehaviour:
   m_ObjectHideFlags: 1

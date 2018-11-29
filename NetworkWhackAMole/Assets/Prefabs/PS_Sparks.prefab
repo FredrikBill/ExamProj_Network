@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4602941507182464}
   - component: {fileID: 198125716823776984}
   - component: {fileID: 199230866622337414}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BeamLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4191185336010230}
   - component: {fileID: 198697135897222710}
   - component: {fileID: 199353389694718210}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SphereParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4083150935337988}
   - component: {fileID: 198845999795237720}
   - component: {fileID: 199711039094852238}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4914418140345820}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PS_Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}

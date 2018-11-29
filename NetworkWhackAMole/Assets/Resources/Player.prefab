@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 114329275500382386}
   - component: {fileID: 114427510774946990}
   - component: {fileID: 114551987242641970}
+  - component: {fileID: 114668104129908564}
   - component: {fileID: 114917713278371684}
   - component: {fileID: 114832476617676718}
   - component: {fileID: 114324349706005608}
@@ -609,39 +610,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a422ba9fdcb5944787122a83e28ffdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitstopCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.1
-      value: 0.01
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.3
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   hurtCurve:
     serializedVersion: 2
     m_Curve:
@@ -785,6 +753,59 @@ MonoBehaviour:
     m_RotationOrder: 4
   hurtColor: {r: 1, g: 1, b: 1, a: 0}
   hammerCol: {fileID: 65936683957255980}
+--- !u!114 &114668104129908564
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1648251509865208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f11f794707d9e64ab285e44cc68654f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitstopCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.02
+      value: 0.05
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.1
+      value: 0.005
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.2
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &114832476617676718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -885,8 +906,8 @@ MonoBehaviour:
   - {fileID: 114551987242641970}
   - {fileID: 114324349706005608}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 1
-  instantiationId: 1
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!143 &143082533228921954

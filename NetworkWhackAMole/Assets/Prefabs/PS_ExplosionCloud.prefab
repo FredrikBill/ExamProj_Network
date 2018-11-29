@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4237262936724376}
   - component: {fileID: 199282290225436928}
   - component: {fileID: 198246820118291152}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PS_ExplosionCloud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4402478579896020}
   - component: {fileID: 198379672700734838}
   - component: {fileID: 199720806062241652}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BeamLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4285839025889062}
   - component: {fileID: 198528002477307400}
   - component: {fileID: 199442054040513908}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FragmentParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4862634390180742}
   - component: {fileID: 198785532160909212}
   - component: {fileID: 199266218840306444}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SphereParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 4235424616501834}
   - component: {fileID: 198301748193358096}
   - component: {fileID: 199787134571631172}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cloud_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
