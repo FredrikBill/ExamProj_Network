@@ -4,17 +4,10 @@ using UnityEngine;
 
 public class MoleState : StateMachineBehaviour {
 
+	//Turns the anim parameter to false when exiting the state
+
 	[SerializeField, Tooltip("The animation parameter it will turn false when exiting")]
 	private MoleStates onExit;
-	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-	{
-	}
-
-	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-	//override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-	//
-	//}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -24,6 +17,10 @@ public class MoleState : StateMachineBehaviour {
 		{
 			animator.GetComponent<BigMole>().onBigMoleRetracted.Invoke();
 		}
+		//else if (animator.GetComponent<DynamiteMole>() && onExit == MoleStates.Retract)
+		//{
+		//	animator.transform.position = animator.GetComponent<MoleBase>().SpawnPos;
+		//}
 	}
 }
 

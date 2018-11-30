@@ -8,10 +8,14 @@ public class PlayerUI : Photon.MonoBehaviour, IPunObservable {
 	private static PlayerUI localPlayerUi;
 	public static PlayerUI LocalPlayerUi { get { return localPlayerUi; } }
 
+	private Animator anim;
+
 	[SerializeField]
 	private TextMeshProUGUI nameText;
 	[SerializeField]
 	private TextMeshProUGUI scoreText;
+	[SerializeField]
+	private TextMeshProUGUI scoreIncreaseText;
 
 	private int score = 0;
 
@@ -32,7 +36,7 @@ public class PlayerUI : Photon.MonoBehaviour, IPunObservable {
 
 			nameText.text = photonView.owner.NickName;
 		}
-
+		anim = GetComponent<Animator>();
 		//set parent to the ui holder
 		PlayerUIHolder.Instance.PlayerUi.Add(this);
 		transform.parent = PlayerUIHolder.Instance.transform;
@@ -44,6 +48,8 @@ public class PlayerUI : Photon.MonoBehaviour, IPunObservable {
 	{
 		score += value;
 		scoreText.text = score.ToString();
+		scoreIncreaseText.text = value.ToString();
+		anim.SetTrigger("IncreaseScore");
 	}
 
 	public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -59,5 +65,4 @@ public class PlayerUI : Photon.MonoBehaviour, IPunObservable {
 			scoreText.text = score.ToString();
 		}
 	}
-
 }

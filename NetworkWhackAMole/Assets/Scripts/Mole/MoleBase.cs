@@ -11,6 +11,7 @@ public class MoleBase : Photon.MonoBehaviour {
 	public Transform TargetHole { get { return targetHole; } }
 
 	protected Vector3 spawnPos;
+	public Vector3 SpawnPos { get { return spawnPos; } }
 
 	protected Animator anim;
 	public Animator Anim { get { return anim; } }

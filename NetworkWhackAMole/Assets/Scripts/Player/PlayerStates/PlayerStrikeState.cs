@@ -23,5 +23,6 @@ public class PlayerStrikeState : StateMachineBehaviour {
 	{
 		player.PAnimator.SetBool("Whack", false);
 		player.PMovement.SetMovementEnabled(true);
+		player.PController.DisableHammerHitbox();
 	}
 }

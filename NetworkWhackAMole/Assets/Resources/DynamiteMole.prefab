@@ -1147,7 +1147,7 @@ MonoBehaviour:
   explosionParticlePrefab: {fileID: 1141177060179140, guid: ba0a7f6738c54c749b4b5ecbf6288a9d,
     type: 2}
   dynamiteFuseParticle: {fileID: 1676375265075160}
-  explosionRadius: 4
+  explosionRadius: 5
 --- !u!114 &114735003585360962
 MonoBehaviour:
   m_ObjectHideFlags: 1

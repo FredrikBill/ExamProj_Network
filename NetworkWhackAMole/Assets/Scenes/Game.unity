@@ -197,7 +197,7 @@ Prefab:
     - target: {fileID: 114915645251366800, guid: 51e178c9847cfa24cbb70a9c8524b77a,
         type: 2}
       propertyPath: isOnline
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51e178c9847cfa24cbb70a9c8524b77a, type: 2}
@@ -211,9 +211,7 @@ GameObject:
   m_Component:
   - component: {fileID: 439661553}
   - component: {fileID: 439661556}
-  - component: {fileID: 439661555}
   - component: {fileID: 439661554}
-  - component: {fileID: 439661557}
   m_Layer: 0
   m_Name: ParticleCamera
   m_TagString: MainCamera
@@ -248,13 +246,6 @@ MonoBehaviour:
   target: {fileID: 0}
   followSpeed: 0.45
   positionOffset: {x: 0, y: 11, z: -11}
---- !u!81 &439661555
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 439661552}
-  m_Enabled: 1
 --- !u!20 &439661556
 Camera:
   m_ObjectHideFlags: 0
@@ -295,19 +286,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &439661557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 439661552}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ceaf2d468ea49b45b6a0c51145ad7c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rTex: {fileID: 8400000, guid: 6de2eaa23730b9e4d8b0a21292eb9110, type: 2}
-  particleCamera: {fileID: 0}
 --- !u!1001 &518739289
 Prefab:
   m_ObjectHideFlags: 0
@@ -582,7 +560,6 @@ GameObject:
   - component: {fileID: 1003256359}
   - component: {fileID: 1003256358}
   - component: {fileID: 1003256361}
-  - component: {fileID: 1003256362}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -665,19 +642,6 @@ MonoBehaviour:
   target: {fileID: 0}
   followSpeed: 0.45
   positionOffset: {x: 0, y: 11, z: -11}
---- !u!114 &1003256362
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1003256357}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ceaf2d468ea49b45b6a0c51145ad7c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rTex: {fileID: 8400000, guid: 6de2eaa23730b9e4d8b0a21292eb9110, type: 2}
-  particleCamera: {fileID: 439661556}
 --- !u!1 &1234420774
 GameObject:
   m_ObjectHideFlags: 0

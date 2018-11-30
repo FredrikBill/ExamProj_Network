@@ -35,10 +35,10 @@ public class DynamiteMole : MoleBase {
 
 		HitStop.PlayHitStop();
 
-		//Iterate through everything
 		if(explosionParticlePrefab !=  null)
 			Instantiate(explosionParticlePrefab, transform.position, Quaternion.identity);
 
+		//Iterate through everything
 		Collider[] col = Physics.OverlapSphere(transform.position, explosionRadius);
 		for (int i = 0; i < col.Length; i++)
 		{
@@ -47,11 +47,14 @@ public class DynamiteMole : MoleBase {
 				col[i].GetComponent<PlayerBase>().PController.Whacked();
 			}
 		}
+
+		transform.position = spawnPos;
+		anim.SetBool("Retract", true);
 	}
 
 	private void OnDrawGizmosSelected()
 	{
-		Gizmos.color = Color.black;
+		Gizmos.color = Color.red;
 		Gizmos.DrawWireSphere(transform.position, explosionRadius);
 	}
 
