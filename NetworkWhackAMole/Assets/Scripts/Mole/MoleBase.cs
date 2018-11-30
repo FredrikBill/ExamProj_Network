@@ -30,8 +30,11 @@ public class MoleBase : Photon.MonoBehaviour {
 		spawnPos = transform.position;
 		transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
 		//subscribe to events
-		MoleManager.Instance.onRaiseMoles += RiseUp;
-		MoleManager.Instance.onRetractMoles += Retract;
+		if(MoleManager.Instance)
+		{
+			MoleManager.Instance.onRaiseMoles += RiseUp;
+			MoleManager.Instance.onRetractMoles += Retract;
+		}
 	}
 
 	public virtual void SetTargetHole(Transform hole)
@@ -46,7 +49,7 @@ public class MoleBase : Photon.MonoBehaviour {
 
 	public void RiseUp()
 	{
-		//if target hole is null, mans that the manager hasn't given us one because we aren't supposed to go up yet.
+		//if target hole is null, means that the manager hasn't given us one because we aren't supposed to go up yet.
 		if (targetHole == null)
 			return;
 

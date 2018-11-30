@@ -85,7 +85,6 @@ public class MoleManager : MonoBehaviour {
 
 	private void RaiseMoles()
 	{
-		print("Starting to raise moles");
 		SetMolesTargetHoles();
 		retractTimer = RetractTimer();
 		StartCoroutine(retractTimer);

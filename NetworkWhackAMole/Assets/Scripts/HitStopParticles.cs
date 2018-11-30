@@ -30,8 +30,6 @@ public class HitStopParticles : MonoBehaviour {
 		//		mainInChildren[i].simulationSpeed = newSpeed;
 		//	}
 		//}
-
-		print(newSpeed);
 	}
 
 	private void OnDisable()

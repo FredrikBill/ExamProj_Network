@@ -7,6 +7,7 @@ public class DynamiteMole : MoleBase {
 	//Mole that will explode a short while after coming out of its hole
 
 	private bool isExploding;
+	private bool hasExploded;
 
 	[Header("GameObjects")]
 
@@ -19,7 +20,23 @@ public class DynamiteMole : MoleBase {
 	[Header("Settings")]
 
 	[SerializeField]
+	private float explosionTime = 2;
+	[SerializeField]
 	private float explosionRadius = 9f;
+
+	private float timer;
+
+	private void Update()
+	{
+		if(timer < explosionTime)
+		{
+			timer += Time.deltaTime;
+		}
+		else if(!isExploding)
+		{
+			Explode();
+		}
+	}
 
 	public override void Whacked(PlayerController player)
 	{
@@ -61,5 +78,6 @@ public class DynamiteMole : MoleBase {
 	protected override void Reset()
 	{
 		isExploding = false;
+		timer = 0;
 	}
 }

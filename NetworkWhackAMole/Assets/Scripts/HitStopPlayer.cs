@@ -39,7 +39,7 @@ public class HitStopPlayer : MonoBehaviour {
 			anim.speed = currentSpeed;
 			if (onUpdateSpeed != null)
 				onUpdateSpeed.Invoke(currentSpeed);
-			print(transform.name + " speed is: " + currentSpeed);
+
 			yield return new WaitForEndOfFrame();
 		}
 
