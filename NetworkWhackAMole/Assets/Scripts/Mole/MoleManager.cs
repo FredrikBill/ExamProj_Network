@@ -80,7 +80,8 @@ public class MoleManager : MonoBehaviour {
 			}
 		}
 
-		bigMole.onBigMoleRetracted += RaiseMoles;
+		if(bigMole != null)
+			bigMole.onBigMoleRetracted += RaiseMoles;
 	}
 
 	private void RaiseMoles()

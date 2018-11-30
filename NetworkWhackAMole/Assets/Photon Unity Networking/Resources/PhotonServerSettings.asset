@@ -40,4 +40,5 @@ MonoBehaviour:
   - UpdateReadyState
   - UpdateName
   - LoadGameLevel
+  - RPCUpdateTimer
   DisableAutoOpenWizard: 1

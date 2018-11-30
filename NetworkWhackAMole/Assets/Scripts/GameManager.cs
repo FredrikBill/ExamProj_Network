@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : Photon.MonoBehaviour{
+public class GameManager : Photon.PunBehaviour{
 
 	private static GameManager instance;
 	public static GameManager Instance { get { return instance; } }
 
+	[Header("Settings")]
+
 	public bool isOnline = true;
+
+	[Header("Prefabs")]
 
 	[SerializeField]
 	private GameObject playerPrefab;
@@ -74,5 +78,10 @@ public class GameManager : Photon.MonoBehaviour{
 			if (onPlayerSpawned != null)
 				onPlayerSpawned.Invoke();
 		}
+	}
+
+	public void GameTimeOver()
+	{
+
 	}
 }
