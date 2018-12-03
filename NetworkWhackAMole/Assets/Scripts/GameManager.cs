@@ -26,6 +26,9 @@ public class GameManager : Photon.PunBehaviour{
 	public delegate void OnStartGame();
 	public OnStartGame onStartGame;
 
+	public delegate void OnStartCountDown();
+	public OnStartCountDown onStartCountDown;
+
 	private void Awake()
 	{
 		if (instance == null)
@@ -42,11 +45,14 @@ public class GameManager : Photon.PunBehaviour{
 		//Run some kind of intro
 		if(PhotonNetwork.offlineMode)
 		{
-			StartGame();
+			if (onStartCountDown != null)
+				onStartCountDown.Invoke();
+
 		}
 		else if(PhotonNetwork.isMasterClient)
 		{
-			StartGame();
+			if (onStartCountDown != null)
+				onStartCountDown.Invoke();
 		}
 	}
 
@@ -78,6 +84,14 @@ public class GameManager : Photon.PunBehaviour{
 			if (onPlayerSpawned != null)
 				onPlayerSpawned.Invoke();
 		}
+	}
+
+	public void CountDownOver()
+	{
+		if(PhotonNetwork.offlineMode)
+			StartGame();
+		else if(PhotonNetwork.isMasterClient)
+			StartGame();
 	}
 
 	public void GameTimeOver()

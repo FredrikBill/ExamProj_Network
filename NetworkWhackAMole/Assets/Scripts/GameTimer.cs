@@ -16,6 +16,7 @@ public class GameTimer : Photon.MonoBehaviour {
 	{
 		GameManager.Instance.onStartGame += SetGameStarted;
 		timeText.text = timeToEnd.ToString();
+		//allocate an id (target) for the photonView, otherwise we would need to instantiate the object over the network.
 		PhotonNetwork.AllocateViewID();
 	}
 
@@ -31,8 +32,10 @@ public class GameTimer : Photon.MonoBehaviour {
 		else if(PhotonNetwork.isMasterClient)
 		{
 			UpdateTimer();
-			//TODO game timer needs to be instantiated over the network
-			photonView.RPC("RPCUpdateTimer", PhotonTargets.AllBufferedViaServer, new object[] { t });
+
+			//only send the rpc if the time is closer to a second below the previous, without this check the other player's timers started to stutter
+			if(Mathf.RoundToInt(t) < t)
+				photonView.RPC("RPCUpdateTimer", PhotonTargets.AllBufferedViaServer, new object[] { t });
 		}
 	}
 
@@ -53,7 +56,6 @@ public class GameTimer : Photon.MonoBehaviour {
 	[PunRPC]
 	private void RPCUpdateTimer(float time)
 	{
-		Debug.Log(time);
 		t = time;
 		timeText.text = t.ToString("f0");
 	}
