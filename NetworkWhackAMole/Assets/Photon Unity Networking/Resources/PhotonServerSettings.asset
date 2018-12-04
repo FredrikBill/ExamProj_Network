@@ -42,4 +42,5 @@ MonoBehaviour:
   - LoadGameLevel
   - RPCUpdateTimer
   - StartCountingDown
+  - SetMovementEnabled
   DisableAutoOpenWizard: 1

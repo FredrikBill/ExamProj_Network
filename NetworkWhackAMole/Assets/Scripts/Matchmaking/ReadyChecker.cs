@@ -17,6 +17,8 @@ public class ReadyChecker : Photon.MonoBehaviour {
 	{
 		if (instance == null)
 			instance = this;
+
+		PhotonNetwork.AllocateViewID();
 	}
 
 	private void OnEnable()

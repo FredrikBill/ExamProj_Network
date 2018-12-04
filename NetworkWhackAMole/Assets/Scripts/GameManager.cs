@@ -18,6 +18,11 @@ public class GameManager : Photon.PunBehaviour{
 	[SerializeField]
 	private GameObject playerUiPrefab;
 
+	[Header("SceneReferences")]
+
+	[SerializeField]
+	private Transform[] playerSpawnPoints;
+
 	private GameObject spawnedPlayer;
 
 	public delegate void OnPlayerSpawned();
@@ -96,6 +101,13 @@ public class GameManager : Photon.PunBehaviour{
 
 	public void GameTimeOver()
 	{
-
+		PlayerBase[] players = FindObjectsOfType<PlayerBase>();
+		for (int i = 0; i < players.Length; i++)
+		{
+			if (PhotonNetwork.offlineMode)
+				players[i].PMovement.SetMovementEnabled(false);
+			else
+				players[i].PMovement.photonView.RPC("SetMovementEnabled", PhotonTargets.AllBufferedViaServer, new object[] { false });
+		}
 	}
 }

@@ -54,3 +54,5 @@ MonoBehaviour:
   maxPlayerPerRoom: 4
   playButton: {fileID: 0}
   cancelButton: {fileID: 0}
+  connectionText: {fileID: 0}
+  readyChecker: {fileID: 0}

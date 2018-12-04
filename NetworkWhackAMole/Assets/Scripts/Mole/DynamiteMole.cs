@@ -8,6 +8,7 @@ public class DynamiteMole : MoleBase {
 
 	private bool isExploding;
 	private bool hasExploded;
+	private bool isActive;
 
 	[Header("GameObjects")]
 
@@ -28,6 +29,9 @@ public class DynamiteMole : MoleBase {
 
 	private void Update()
 	{
+		if (!isActive)
+			return;
+
 		if(timer < explosionTime)
 		{
 			timer += Time.deltaTime;
@@ -46,14 +50,19 @@ public class DynamiteMole : MoleBase {
 		Explode();
 	}
 
+	public override void RiseUp()
+	{
+		base.RiseUp();
+		isActive = true;
+	}
+
 	private void Explode()
 	{
 		isExploding = true;
 
 		HitStop.PlayHitStop();
 
-		if(explosionParticlePrefab !=  null)
-			Instantiate(explosionParticlePrefab, transform.position, Quaternion.identity);
+		SpawnParticle(explosionParticlePrefab);
 
 		//Iterate through everything
 		Collider[] col = Physics.OverlapSphere(transform.position, explosionRadius);
@@ -79,5 +88,6 @@ public class DynamiteMole : MoleBase {
 	{
 		isExploding = false;
 		timer = 0;
+		isActive = false;
 	}
 }

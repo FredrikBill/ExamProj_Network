@@ -46,8 +46,17 @@ public class Hammer : MonoBehaviour {
 
 	private void SpawnHitEffect()
 	{
-		GameObject go = Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
-		go.GetComponent<HitStopParticles>().SetSpawnedByPlayer(player);
+		if(PhotonNetwork.offlineMode)
+		{
+			GameObject go = Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
+			go.GetComponent<HitStopParticles>().SetSpawnedByPlayer(player);
+		}
+		else if(player.photonView.isMine)
+		{
+			GameObject go = PhotonNetwork.Instantiate(hitEffectPrefab.name, transform.position, Quaternion.identity, 0);
+			go.GetComponent<HitStopParticles>().SetSpawnedByPlayer(player);
+		}
+
 
 		//if (PhotonNetwork.offlineMode)
 		//{

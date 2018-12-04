@@ -145,6 +145,7 @@ public class PlayerMovement : PlayerBase {
 		}
 	}
 
+	[PunRPC]
 	/// <summary>
 	/// Sets if the player should be able to move or not
 	/// </summary>

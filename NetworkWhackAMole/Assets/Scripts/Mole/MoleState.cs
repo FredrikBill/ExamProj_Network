@@ -9,13 +9,18 @@ public class MoleState : StateMachineBehaviour {
 	[SerializeField, Tooltip("The animation parameter it will turn false when exiting")]
 	private MoleStates onExit;
 
+
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		animator.SetBool(onExit.ToString(), false);
+
 		if(animator.GetComponent<BigMole>() && onExit == MoleStates.Retract)
 		{
-			animator.GetComponent<BigMole>().onBigMoleRetracted.Invoke();
+			if(PhotonNetwork.isMasterClient)
+			{
+				animator.GetComponent<BigMole>().onBigMoleRetracted();
+			}
 		}
 		//else if (animator.GetComponent<DynamiteMole>() && onExit == MoleStates.Retract)
 		//{

@@ -47,7 +47,7 @@ public class MoleBase : Photon.MonoBehaviour {
 
 	}
 
-	public void RiseUp()
+	public virtual void RiseUp()
 	{
 		//if target hole is null, means that the manager hasn't given us one because we aren't supposed to go up yet.
 		if (targetHole == null)
@@ -58,19 +58,27 @@ public class MoleBase : Photon.MonoBehaviour {
 		Reset();
 		//Play animation
 		anim.SetBool("RiseUp", true);
-		Instantiate(dirtEffectPrefab, transform.position, Quaternion.identity);
+		SpawnParticle(dirtEffectPrefab);
 	}
 
-	public void Retract()
+	public virtual void Retract()
 	{
 		//collision disabled so that you can't hit a mole while they are retracting
 		col.enabled = false;
 		anim.SetBool("Retract", true);
-		Instantiate(dirtEffectPrefab, transform.position, Quaternion.identity);
+		SpawnParticle(dirtEffectPrefab);
 	}
 
 	protected virtual void Reset()
 	{
 
+	}
+
+	protected void SpawnParticle(GameObject particlePrefab)
+	{
+		if (PhotonNetwork.offlineMode)
+			Instantiate(particlePrefab, transform.position, Quaternion.identity);
+		else
+			PhotonNetwork.InstantiateSceneObject(particlePrefab.name, transform.position, Quaternion.identity, 0, null);
 	}
 }

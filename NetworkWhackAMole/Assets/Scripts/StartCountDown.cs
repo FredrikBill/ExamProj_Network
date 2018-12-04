@@ -16,8 +16,8 @@ public class StartCountDown : Photon.MonoBehaviour
 	[PunRPC]
 	private void StartCountingDown()
 	{
-		anim.SetBool("CountDown", true);
+		anim.SetTrigger("CountDown");
 		if(PhotonNetwork.isMasterClient)
-			photonView.RPC("StartCountingDown", PhotonTargets.AllBufferedViaServer);
+			photonView.RPC("StartCountingDown", PhotonTargets.OthersBuffered);
 	}
 }
