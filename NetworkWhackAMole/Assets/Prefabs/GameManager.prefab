@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4645775868054116}
   - component: {fileID: 114915645251366800}
+  - component: {fileID: 114024379113704410}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -40,6 +41,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114024379113704410
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1153647848203172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da979dd3326027d4c9d22a2ae8afa34f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeText: {fileID: 0}
+  timeToEnd: 60
 --- !u!114 &114915645251366800
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51,8 +65,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ab3226b2f61d6d459b68d77c54eb602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOnline: 1
+  isOnline: 0
   playerPrefab: {fileID: 1648251509865208, guid: 85d8e5ad1b442ce45963c57a17304ca9,
     type: 2}
   playerUiPrefab: {fileID: 1993114388162196, guid: 9a3edee7d78269941877e2a9e29b1fe1,
     type: 2}
+  playerSpawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

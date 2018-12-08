@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using ExitGames.UtilityScripts;
 public class GameManager : Photon.PunBehaviour{
 
 	private static GameManager instance;
@@ -47,8 +47,9 @@ public class GameManager : Photon.PunBehaviour{
 	private void Start()
 	{
 		SpawnPlayer();
+		SetAllPlayersCanMove(false);
 		//Run some kind of intro
-		if(PhotonNetwork.offlineMode)
+		if (PhotonNetwork.offlineMode)
 		{
 			if (onStartCountDown != null)
 				onStartCountDown.Invoke();
@@ -73,14 +74,15 @@ public class GameManager : Photon.PunBehaviour{
 		{
 			if (isOnline)
 			{
-				spawnedPlayer = PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0, 5f, 0), Quaternion.identity, 0);
+				int spawnIndex = (int)PhotonNetwork.player.CustomProperties["PlayerNumber"];
+				spawnedPlayer = PhotonNetwork.Instantiate(this.playerPrefab.name, playerSpawnPoints[spawnIndex].position, Quaternion.identity, 0);
 				if (playerUiPrefab != null)
 					PhotonNetwork.Instantiate(this.playerUiPrefab.name, Vector3.zero, Quaternion.identity, 0);
 			}
 
 			else
 			{
-				spawnedPlayer = Instantiate(this.playerPrefab, new Vector3(0, 5, 0), Quaternion.identity);
+				spawnedPlayer = Instantiate(this.playerPrefab, playerSpawnPoints[0].position, Quaternion.identity);
 				if (playerUiPrefab != null)
 					Instantiate(playerUiPrefab, Vector3.zero, Quaternion.identity);
 			}
@@ -97,17 +99,24 @@ public class GameManager : Photon.PunBehaviour{
 			StartGame();
 		else if(PhotonNetwork.isMasterClient)
 			StartGame();
+
+		SetAllPlayersCanMove(true);
 	}
 
 	public void GameTimeOver()
+	{
+		SetAllPlayersCanMove(false);
+	}
+
+	private void SetAllPlayersCanMove(bool state)
 	{
 		PlayerBase[] players = FindObjectsOfType<PlayerBase>();
 		for (int i = 0; i < players.Length; i++)
 		{
 			if (PhotonNetwork.offlineMode)
-				players[i].PMovement.SetMovementEnabled(false);
+				players[i].PMovement.SetMovementEnabled(state);
 			else
-				players[i].PMovement.photonView.RPC("SetMovementEnabled", PhotonTargets.AllBufferedViaServer, new object[] { false });
+				players[i].PMovement.photonView.RPC("SetMovementEnabled", PhotonTargets.AllBufferedViaServer, new object[] { state });
 		}
 	}
 }

@@ -5,11 +5,14 @@ using TMPro;
 [ExecuteInEditMode]
 public class AnimatedText : MonoBehaviour {
 
+	//Since Text Mesh Pro's fields doesn't work with animations-
+	//this class has options for changing the text and color 
+
 	public Color color;
 	[SerializeField, Tooltip("The Text you want to animate, if left null, it will attempt to get text on the same game object")]
 	private TextMeshProUGUI text;
 
-	public string t;
+	private string t;
 	private Color32 tmpColor;
 
 	private void Awake()
@@ -21,6 +24,9 @@ public class AnimatedText : MonoBehaviour {
 
 	private void Update()
 	{
+		if (text == null)
+			return;
+
 		tmpColor = text.color;
 		tmpColor.a = (byte)(color.a * 255);
 		tmpColor.r = (byte)(color.r * 255);

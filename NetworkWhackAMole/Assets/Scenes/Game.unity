@@ -190,11 +190,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114915645251366800, guid: 51e178c9847cfa24cbb70a9c8524b77a,
-        type: 2}
-      propertyPath: playerSpawnPoints.Array.size
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 4645775868054116, guid: 51e178c9847cfa24cbb70a9c8524b77a, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -227,11 +222,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114915645251366800, guid: 51e178c9847cfa24cbb70a9c8524b77a,
+    - target: {fileID: 114024379113704410, guid: 51e178c9847cfa24cbb70a9c8524b77a,
         type: 2}
-      propertyPath: isOnline
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: timeText
+      value: 
+      objectReference: {fileID: 1159408417}
     - target: {fileID: 114915645251366800, guid: 51e178c9847cfa24cbb70a9c8524b77a,
         type: 2}
       propertyPath: playerSpawnPoints.Array.data[0]
@@ -252,6 +247,16 @@ Prefab:
       propertyPath: playerSpawnPoints.Array.data[3]
       value: 
       objectReference: {fileID: 637815397}
+    - target: {fileID: 114024379113704410, guid: 51e178c9847cfa24cbb70a9c8524b77a,
+        type: 2}
+      propertyPath: timeToEnd
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 114915645251366800, guid: 51e178c9847cfa24cbb70a9c8524b77a,
+        type: 2}
+      propertyPath: isOnline
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51e178c9847cfa24cbb70a9c8524b77a, type: 2}
   m_IsPrefabAsset: 0
@@ -894,7 +899,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: {r: 0, g: 0, b: 0, a: 0}
   text: {fileID: 899936371}
-  t: 
 --- !u!114 &899936374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1066,7 +1070,6 @@ GameObject:
   - component: {fileID: 1159408415}
   - component: {fileID: 1159408418}
   - component: {fileID: 1159408417}
-  - component: {fileID: 1159408416}
   - component: {fileID: 1159408419}
   m_Layer: 5
   m_Name: GameTimer
@@ -1093,19 +1096,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -30}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1159408416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1159408414}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da979dd3326027d4c9d22a2ae8afa34f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeText: {fileID: 1159408417}
-  timeToEnd: 10
 --- !u!114 &1159408417
 MonoBehaviour:
   m_ObjectHideFlags: 0

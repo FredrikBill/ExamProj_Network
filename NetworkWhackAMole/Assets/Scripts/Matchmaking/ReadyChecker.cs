@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ReadyChecker : Photon.MonoBehaviour {
+public class ReadyChecker : Photon.MonoBehaviour
+{
 
 	private static ReadyChecker instance;
 	public static ReadyChecker Instance { get { return instance; } }
@@ -39,8 +40,26 @@ public class ReadyChecker : Photon.MonoBehaviour {
 
 		print("ALL PLAYERS ARE READY, LET'S PLAY");
 		//TIME TO START THE GAME
-		if(PhotonNetwork.isMasterClient)
+		if (PhotonNetwork.isMasterClient)
+		{
+			//set all the other player's properties, used for spawning in the correct place
+			ExitGames.Client.Photon.Hashtable playerProperties;
+			for (int i = 0; i < PhotonNetwork.otherPlayers.Length; i++)
+			{
+				int playerNumber = i + 1;
+				playerProperties = PhotonNetwork.otherPlayers[i].CustomProperties;
+				playerProperties["PlayerNumber"] = playerNumber;
+				PhotonNetwork.otherPlayers[i].SetCustomProperties(playerProperties);
+			}
+
+			//set the master's player properties
+			playerProperties = PhotonNetwork.player.CustomProperties;
+			playerProperties["PlayerNumber"] = 0;
+			PhotonNetwork.player.SetCustomProperties(playerProperties);
+
+			//finally load the level
 			photonView.RPC("LoadGameLevel", PhotonTargets.AllBufferedViaServer);
+		}
 	}
 
 	[PunRPC]

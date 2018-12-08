@@ -67,6 +67,9 @@ public class NetworkLauncher : Photon.PunBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Called when hitting the cancel button during matchmaking
+	/// </summary>
 	public void Disconnect()
 	{
 		isConnecting = false;
@@ -119,6 +122,9 @@ public class NetworkLauncher : Photon.PunBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Hides the matchmaking hud and brings up the readychecker
+	/// </summary>
 	private void ShowReadyCheck()
 	{
 		//show hud element to show ready state
@@ -127,6 +133,9 @@ public class NetworkLauncher : Photon.PunBehaviour
 		readyChecker.gameObject.SetActive(true);
 	}
 
+	/// <summary>
+	/// Hides the ready checker and brings up the cancel button
+	/// </summary>
 	private void HideReadyCheck()
 	{
 		cancelButton.SetActive(true);

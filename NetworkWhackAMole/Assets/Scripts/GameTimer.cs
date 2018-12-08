@@ -33,6 +33,8 @@ public class GameTimer : Photon.MonoBehaviour {
 		{
 			UpdateTimer();
 
+			//probably a bad idea, but wanted to see if it was possible
+			//basically the master client keeps track of the timer but 
 			//only send the rpc if the time is closer to a second below the previous, without this check the other player's timers started to stutter
 			if(Mathf.RoundToInt(t) < t)
 				photonView.RPC("RPCUpdateTimer", PhotonTargets.AllBufferedViaServer, new object[] { t });
