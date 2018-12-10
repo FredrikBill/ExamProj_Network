@@ -43,4 +43,6 @@ MonoBehaviour:
   - RPCUpdateTimer
   - StartCountingDown
   - SetMovementEnabled
+  - RPCFootstep
+  - RPCSetAnimWhacked
   DisableAutoOpenWizard: 1

@@ -83,4 +83,10 @@ public class MoleBase : Photon.MonoBehaviour {
 		else
 			PhotonNetwork.InstantiateSceneObject(particlePrefab.name, transform.position, Quaternion.identity, 0, null);
 	}
+
+	[PunRPC]
+	protected void RPCSetAnimWhacked()
+	{
+		anim.SetTrigger("W");
+	}
 }

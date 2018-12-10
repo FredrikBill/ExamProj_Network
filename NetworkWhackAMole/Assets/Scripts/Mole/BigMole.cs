@@ -33,14 +33,8 @@ public class BigMole : MoleBase {
 
 			anim.SetTrigger("W");
 			HitStop.PlayHitStop();
-			//if(anim.GetBool("Whacked"))
-			//{
-			//	anim.Play("Whacked", 0);
-			//}
-			//else
-			//{
-			//	anim.SetBool("Whacked", true);
-			//}
+			if (!PhotonNetwork.offlineMode)
+				photonView.RPC("RPCSetAnimWhacked", PhotonTargets.OthersBuffered);
 		}
 	}
 

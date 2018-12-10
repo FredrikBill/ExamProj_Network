@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerCollision : PlayerBase {
 
 	//Handles all the collisions for the player
+	//Deprecated, logic has been moved to the hammer
 
 	private void OnTriggerEnter(Collider other)
 	{

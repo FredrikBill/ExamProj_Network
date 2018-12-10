@@ -222,11 +222,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114024379113704410, guid: 51e178c9847cfa24cbb70a9c8524b77a,
-        type: 2}
-      propertyPath: timeText
-      value: 
-      objectReference: {fileID: 1159408417}
     - target: {fileID: 114915645251366800, guid: 51e178c9847cfa24cbb70a9c8524b77a,
         type: 2}
       propertyPath: playerSpawnPoints.Array.data[0]
@@ -249,9 +244,9 @@ Prefab:
       objectReference: {fileID: 637815397}
     - target: {fileID: 114024379113704410, guid: 51e178c9847cfa24cbb70a9c8524b77a,
         type: 2}
-      propertyPath: timeToEnd
-      value: 60
-      objectReference: {fileID: 0}
+      propertyPath: timeText
+      value: 
+      objectReference: {fileID: 1159408417}
     - target: {fileID: 114915645251366800, guid: 51e178c9847cfa24cbb70a9c8524b77a,
         type: 2}
       propertyPath: isOnline
