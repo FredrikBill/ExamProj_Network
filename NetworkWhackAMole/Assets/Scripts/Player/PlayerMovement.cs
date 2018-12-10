@@ -139,10 +139,24 @@ public class PlayerMovement : PlayerBase {
 		if (Time.time > footstepTimer && isMoving)
 		{
 			footstepTimer = Time.time + 1 / footStepRate;
-			footstepAudioSource.pitch = Random.Range(.9f, 1.1f);
-			footstepAudioSource.volume = Random.Range(.85f, .9f);
-			footstepAudioSource.Play();
+			PlayFootstep();
+			if (!PhotonNetwork.offlineMode)
+				photonView.RPC("RPCFootstep", PhotonTargets.OthersBuffered);
 		}
+	}
+
+	private void PlayFootstep()
+	{
+		//tell the audio source to play with some random pitch and volume to avoid becoming too stale
+		footstepAudioSource.pitch = Random.Range(.9f, 1.1f);
+		footstepAudioSource.volume = Random.Range(.85f, .9f);
+		footstepAudioSource.Play();
+	}
+
+	[PunRPC]
+	private void RPCFootstep()
+	{
+		PlayFootstep();
 	}
 
 	[PunRPC]

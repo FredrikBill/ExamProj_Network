@@ -9,6 +9,8 @@ public class BigMole : MoleBase {
 	private Transform previousHole;
 	public Transform PreviousHole { get { return previousHole; } }
 
+	[Header("Settings")]
+
 	[SerializeField]
 	private int scorePerHit = 2;
 

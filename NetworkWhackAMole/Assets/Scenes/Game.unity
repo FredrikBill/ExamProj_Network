@@ -1070,7 +1070,7 @@ GameObject:
   - component: {fileID: 1159408415}
   - component: {fileID: 1159408418}
   - component: {fileID: 1159408417}
-  - component: {fileID: 1159408419}
+  - component: {fileID: 1159408416}
   m_Layer: 5
   m_Name: GameTimer
   m_TagString: Untagged
@@ -1096,6 +1096,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -30}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1159408416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1159408414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  OwnerShipWasTransfered: 0
+  prefixBackup: -1
+  synchronization: 0
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 1
+  instantiationId: 1
+  currentMasterID: -1
+  isRuntimeInstantiated: 0
 --- !u!114 &1159408417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1218,32 +1244,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1159408414}
   m_CullTransparentMesh: 0
---- !u!114 &1159408419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1159408414}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  OwnerShipWasTransfered: 0
-  prefixBackup: -1
-  synchronization: 0
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 1
-  instantiationId: 1
-  currentMasterID: -1
-  isRuntimeInstantiated: 0
 --- !u!1 &1234420774
 GameObject:
   m_ObjectHideFlags: 0
@@ -1382,61 +1382,88 @@ CapsuleCollider:
   m_Height: 8
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &1749820011
-GameObject:
+--- !u!1001 &1757995818
+Prefab:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1749820013}
-  - component: {fileID: 1749820012}
-  m_Layer: 0
-  m_Name: MoleManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1749820012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1749820011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8355c63c50e0e794194cd99ccc8d8731, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bigMolePrefab: {fileID: 1349320603489736, guid: 0f39109b20ad2c2428eb54592ecc133b,
-    type: 2}
-  dynamiteMolePrefab: {fileID: 1349320603489736, guid: 096169d7edaba03499bbd5e782c96019,
-    type: 2}
-  moleSpawnPoint: {fileID: 671554679}
-  moleHoles:
-  - {fileID: 1638349378}
-  - {fileID: 944337397}
-  - {fileID: 29139940}
-  - {fileID: 785925583}
-  - {fileID: 1839623597}
-  - {fileID: 1890169982}
-  - {fileID: 1803476370}
-  dynamiteMolesAmount: 6
-  timeBetweenRounds: 10
---- !u!4 &1749820013
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1749820011}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4108128758205410, guid: 3d60b77852643c144ad2920bd8621c84, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4108128758205410, guid: 3d60b77852643c144ad2920bd8621c84, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4108128758205410, guid: 3d60b77852643c144ad2920bd8621c84, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4108128758205410, guid: 3d60b77852643c144ad2920bd8621c84, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4108128758205410, guid: 3d60b77852643c144ad2920bd8621c84, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4108128758205410, guid: 3d60b77852643c144ad2920bd8621c84, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4108128758205410, guid: 3d60b77852643c144ad2920bd8621c84, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4108128758205410, guid: 3d60b77852643c144ad2920bd8621c84, type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114656508971769296, guid: 3d60b77852643c144ad2920bd8621c84,
+        type: 2}
+      propertyPath: moleSpawnPoint
+      value: 
+      objectReference: {fileID: 671554679}
+    - target: {fileID: 114656508971769296, guid: 3d60b77852643c144ad2920bd8621c84,
+        type: 2}
+      propertyPath: moleHoles.Array.data[0]
+      value: 
+      objectReference: {fileID: 1638349378}
+    - target: {fileID: 114656508971769296, guid: 3d60b77852643c144ad2920bd8621c84,
+        type: 2}
+      propertyPath: moleHoles.Array.data[1]
+      value: 
+      objectReference: {fileID: 944337397}
+    - target: {fileID: 114656508971769296, guid: 3d60b77852643c144ad2920bd8621c84,
+        type: 2}
+      propertyPath: moleHoles.Array.data[2]
+      value: 
+      objectReference: {fileID: 29139940}
+    - target: {fileID: 114656508971769296, guid: 3d60b77852643c144ad2920bd8621c84,
+        type: 2}
+      propertyPath: moleHoles.Array.data[3]
+      value: 
+      objectReference: {fileID: 785925583}
+    - target: {fileID: 114656508971769296, guid: 3d60b77852643c144ad2920bd8621c84,
+        type: 2}
+      propertyPath: moleHoles.Array.data[4]
+      value: 
+      objectReference: {fileID: 1839623597}
+    - target: {fileID: 114656508971769296, guid: 3d60b77852643c144ad2920bd8621c84,
+        type: 2}
+      propertyPath: moleHoles.Array.data[5]
+      value: 
+      objectReference: {fileID: 1890169982}
+    - target: {fileID: 114656508971769296, guid: 3d60b77852643c144ad2920bd8621c84,
+        type: 2}
+      propertyPath: moleHoles.Array.data[6]
+      value: 
+      objectReference: {fileID: 1803476370}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3d60b77852643c144ad2920bd8621c84, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &1803476369
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerController : PlayerBase {
+public class PlayerController : PlayerBase
+{
 
 	//Handles miscellaneous tasks, a center point for other components to access
 	//Also currently takes care of animations
+	[Header("References")]
+
+	[SerializeField]
+	private Collider hammerCol;
+
+	[Header("Settings")]
 
 	[SerializeField]
 	private AnimationCurve hurtCurve;
@@ -28,15 +35,12 @@ public class PlayerController : PlayerBase {
 	private HitStopPlayer hitStop;
 	public HitStopPlayer HitStop { get { return hitStop; } }
 
-	[SerializeField]
-	private Collider hammerCol;
-
 	private bool isInvincible;
 	public bool IsInvincible { get { return isInvincible; } }
 
 	private void Awake()
 	{
-		if(photonView.isMine)
+		if (photonView.isMine)
 		{
 			if (localPlayer == null)
 				localPlayer = this;
@@ -48,9 +52,9 @@ public class PlayerController : PlayerBase {
 
 	private void Update()
 	{
-		if(photonView.isMine)
+		if (photonView.isMine)
 		{
-			if(PInput.WhackButton)
+			if (PInput.WhackButton)
 			{
 				PAnimator.SetBool("Whack", true);
 			}
@@ -131,7 +135,7 @@ public class PlayerController : PlayerBase {
 		Vector3 startPos = transform.position;
 		float distance = 2f;
 		Vector3 endPos = transform.position + (dir * distance);
-		while(timer <= inTime)
+		while (timer <= inTime)
 		{
 			timer += Time.deltaTime;
 			transform.position = Vector3.Lerp(startPos, endPos, timer / inTime);
@@ -143,7 +147,7 @@ public class PlayerController : PlayerBase {
 	{
 		float timer = 0;
 		float inTime = .5f;
-		while(timer <= inTime)
+		while (timer <= inTime)
 		{
 			timer += Time.deltaTime;
 			yield return new WaitForEndOfFrame();

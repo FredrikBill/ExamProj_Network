@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MoleBase : Photon.MonoBehaviour {
 
+	[Header("Base Defaults")]
+
 	[SerializeField]
 	private GameObject dirtEffectPrefab;
 

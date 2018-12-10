@@ -4,10 +4,15 @@ using UnityEngine;
 using TMPro;
 public class GameTimer : Photon.MonoBehaviour {
 
+	[Header("References")]
+
 	[SerializeField]
 	private TextMeshProUGUI timeText;
+
+	[Header("Settings")]
+
 	[SerializeField]
-	private int timeToEnd = 60;
+	private int gameTime = 60;
 
 	private bool gameStarted;
 	private float t;
@@ -15,7 +20,7 @@ public class GameTimer : Photon.MonoBehaviour {
 	private void Awake()
 	{
 		GameManager.Instance.onStartGame += SetGameStarted;
-		timeText.text = timeToEnd.ToString();
+		timeText.text = gameTime.ToString();
 		//allocate an id (target) for the photonView, otherwise we would need to instantiate the object over the network.
 		PhotonNetwork.AllocateViewID();
 	}
@@ -34,7 +39,7 @@ public class GameTimer : Photon.MonoBehaviour {
 			UpdateTimer();
 
 			//probably a bad idea, but wanted to see if it was possible
-			//basically the master client keeps track of the timer but 
+			//basically the master client keeps track of the timer but sends the result over the network
 			//only send the rpc if the time is closer to a second below the previous, without this check the other player's timers started to stutter
 			if(Mathf.RoundToInt(t) < t)
 				photonView.RPC("RPCUpdateTimer", PhotonTargets.AllBufferedViaServer, new object[] { t });
@@ -65,6 +70,6 @@ public class GameTimer : Photon.MonoBehaviour {
 	private void SetGameStarted()
 	{
 		gameStarted = true;
-		t = timeToEnd;
+		t = gameTime;
 	}
 }

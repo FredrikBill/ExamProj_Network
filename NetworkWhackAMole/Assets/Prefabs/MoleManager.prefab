@@ -9,31 +9,30 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1153647848203172}
+  m_RootGameObject: {fileID: 1008522374059300}
   m_IsPrefabAsset: 1
---- !u!1 &1153647848203172
+--- !u!1 &1008522374059300
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4645775868054116}
-  - component: {fileID: 114915645251366800}
-  - component: {fileID: 114024379113704410}
+  - component: {fileID: 4108128758205410}
+  - component: {fileID: 114656508971769296}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: MoleManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4645775868054116
+--- !u!4 &4108128758205410
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1153647848203172}
+  m_GameObject: {fileID: 1008522374059300}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -41,37 +40,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114024379113704410
+--- !u!114 &114656508971769296
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1153647848203172}
+  m_GameObject: {fileID: 1008522374059300}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da979dd3326027d4c9d22a2ae8afa34f, type: 3}
+  m_Script: {fileID: 11500000, guid: 8355c63c50e0e794194cd99ccc8d8731, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeText: {fileID: 0}
-  timeToEnd: 60
---- !u!114 &114915645251366800
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1153647848203172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ab3226b2f61d6d459b68d77c54eb602, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isOnline: 1
-  playerPrefab: {fileID: 1648251509865208, guid: 85d8e5ad1b442ce45963c57a17304ca9,
+  bigMolePrefab: {fileID: 1349320603489736, guid: 0f39109b20ad2c2428eb54592ecc133b,
     type: 2}
-  playerUiPrefab: {fileID: 1993114388162196, guid: 9a3edee7d78269941877e2a9e29b1fe1,
+  dynamiteMolePrefab: {fileID: 1349320603489736, guid: 096169d7edaba03499bbd5e782c96019,
     type: 2}
-  playerSpawnPoints:
+  moleSpawnPoint: {fileID: 0}
+  moleHoles:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  dynamiteMolesAmount: 6
+  timeBetweenRounds: 10

@@ -110,6 +110,7 @@ public class GameManager : Photon.PunBehaviour{
 
 	private void SetAllPlayersCanMove(bool state)
 	{
+		//Ugly but effective, should be fixed by storing or requesting a reference to all the player characters
 		PlayerBase[] players = FindObjectsOfType<PlayerBase>();
 		for (int i = 0; i < players.Length; i++)
 		{
