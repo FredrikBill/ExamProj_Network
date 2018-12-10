@@ -57,6 +57,9 @@ public class ReadyChecker : Photon.MonoBehaviour
 			playerProperties["PlayerNumber"] = 0;
 			PhotonNetwork.player.SetCustomProperties(playerProperties);
 
+			//Close the room so that others can't join
+			PhotonNetwork.room.IsOpen = false;
+
 			//finally load the level
 			photonView.RPC("LoadGameLevel", PhotonTargets.AllBufferedViaServer);
 		}
