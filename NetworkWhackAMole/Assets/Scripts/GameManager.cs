@@ -18,7 +18,7 @@ public class GameManager : Photon.PunBehaviour{
 	[SerializeField]
 	private GameObject playerUiPrefab;
 
-	[Header("SceneReferences")]
+	[Header("References")]
 
 	[SerializeField]
 	private Transform[] playerSpawnPoints;

@@ -22,6 +22,7 @@ public class PlayerMovement : PlayerBase {
 	public bool IsMoving { get { return isMoving; } }
 	private float footstepTimer;
 	private bool canMove = true;
+	public bool CanMove { get { return canMove; } }
 	[SerializeField]
 	private float footStepRate = 2.3f;
 

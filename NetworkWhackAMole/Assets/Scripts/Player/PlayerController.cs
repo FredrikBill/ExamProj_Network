@@ -54,7 +54,7 @@ public class PlayerController : PlayerBase
 	{
 		if (photonView.isMine)
 		{
-			if (PInput.WhackButton)
+			if (PInput.WhackButton && PMovement.CanMove)
 			{
 				PAnimator.SetBool("Whack", true);
 			}
