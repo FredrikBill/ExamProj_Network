@@ -9,7 +9,7 @@ public class GameManager : Photon.PunBehaviour{
 
 	[Header("Settings")]
 
-	public bool isOnline = true;
+	private bool isOnline = true;
 
 	[Header("Prefabs")]
 
@@ -41,6 +41,8 @@ public class GameManager : Photon.PunBehaviour{
 		else
 			Destroy(gameObject);
 
+
+		isOnline = PhotonNetwork.connected;
 		PhotonNetwork.offlineMode = !isOnline;
 	}
 
@@ -79,7 +81,6 @@ public class GameManager : Photon.PunBehaviour{
 				if (playerUiPrefab != null)
 					PhotonNetwork.Instantiate(this.playerUiPrefab.name, Vector3.zero, Quaternion.identity, 0);
 			}
-
 			else
 			{
 				spawnedPlayer = Instantiate(this.playerPrefab, playerSpawnPoints[0].position, Quaternion.identity);
@@ -90,6 +91,14 @@ public class GameManager : Photon.PunBehaviour{
 
 			if (onPlayerSpawned != null)
 				onPlayerSpawned.Invoke();
+		}
+	}
+
+	public override void OnMasterClientSwitched(PhotonPlayer newMasterClient)
+	{
+		if(newMasterClient == PhotonNetwork.player)
+		{
+			MoleManager.Instance.SetMolesSubscription();
 		}
 	}
 

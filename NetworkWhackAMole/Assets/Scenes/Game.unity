@@ -250,7 +250,7 @@ Prefab:
     - target: {fileID: 114915645251366800, guid: 51e178c9847cfa24cbb70a9c8524b77a,
         type: 2}
       propertyPath: isOnline
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51e178c9847cfa24cbb70a9c8524b77a, type: 2}
