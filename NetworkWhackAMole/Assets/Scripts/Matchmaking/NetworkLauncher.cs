@@ -18,7 +18,6 @@ public class NetworkLauncher : Photon.PunBehaviour
 	private byte maxPlayerPerRoom = 4;
 
 	private static string gameVersion = "1";
-	public static string GameVersion { get { return gameVersion; } }
 
 	private bool isConnecting;
 
