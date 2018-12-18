@@ -41,6 +41,7 @@ public class GameManager : Photon.PunBehaviour{
 		else
 			Destroy(gameObject);
 
+		isOnline = PhotonNetwork.connected;
 		PhotonNetwork.offlineMode = !isOnline;
 	}
 
