@@ -16,7 +16,19 @@ public class PlayerUIHolder : MonoBehaviour {
 			instance = this;
 		else
 			Destroy(gameObject);
+	}
 
+	public PlayerUI GetPlayerHighestScore()
+	{
+		PlayerUI player = new PlayerUI();
+		for (int i = 0; i < playerUi.Count; i++)
+		{
+			if(playerUi[i].Score > player.Score)
+			{
+				player = playerUi[i];
+			}
+		}
 
+		return player;
 	}
 }

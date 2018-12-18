@@ -17,9 +17,9 @@ public class MoleState : StateMachineBehaviour {
 
 		if(animator.GetComponent<BigMole>() && onExit == MoleStates.Retract)
 		{
-			if(PhotonNetwork.isMasterClient)
+			if(PhotonNetwork.isMasterClient || PhotonNetwork.offlineMode)
 			{
-				animator.GetComponent<BigMole>().onBigMoleRetracted();
+				animator.GetComponent<BigMole>().InvokeOnRetracted();
 			}
 		}
 		//else if (animator.GetComponent<DynamiteMole>() && onExit == MoleStates.Retract)

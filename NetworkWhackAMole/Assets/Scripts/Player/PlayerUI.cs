@@ -18,6 +18,7 @@ public class PlayerUI : Photon.MonoBehaviour, IPunObservable {
 	private TextMeshProUGUI scoreIncreaseText;
 
 	private int score = 0;
+	public int Score { get { return score; } }
 
 	private void Awake()
 	{

@@ -107,6 +107,8 @@ public class GameManager : Photon.PunBehaviour{
 	public void GameTimeOver()
 	{
 		SetAllPlayersCanMove(false);
+		MoleManager.Instance.Stop();
+		Debug.Log(PlayerUIHolder.Instance.GetPlayerHighestScore().Score);
 	}
 
 	private void SetAllPlayersCanMove(bool state)

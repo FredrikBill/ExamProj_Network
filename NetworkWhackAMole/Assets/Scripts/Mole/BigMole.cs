@@ -38,4 +38,9 @@ public class BigMole : MoleBase {
 		}
 	}
 
+	public void InvokeOnRetracted()
+	{
+		if (onBigMoleRetracted != null)
+			onBigMoleRetracted.Invoke();
+	}
 }

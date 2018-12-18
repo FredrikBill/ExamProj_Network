@@ -159,6 +159,23 @@ public class MoleManager : MonoBehaviour {
 		//}
 		//RaiseMoles();
 	}
+
+	public void Stop()
+	{
+		StopAllCoroutines();
+		RetractMoles();
+		bigMole.onBigMoleRetracted -= RaiseMoles;
+		bigMole.onBigMoleRetracted += ResetMolePositions;
+	}
+
+	private void ResetMolePositions()
+	{
+		bigMole.transform.position = moleSpawnPoint.position;
+		for (int i = 0; i < dynamiteMoles.Count; i++)
+		{
+			dynamiteMoles[i].transform.position = moleSpawnPoint.position;
+		}
+	}
 	
 	private void OnDrawGizmos()
 	{
