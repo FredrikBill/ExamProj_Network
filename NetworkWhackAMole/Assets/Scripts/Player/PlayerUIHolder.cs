@@ -10,6 +10,8 @@ public class PlayerUIHolder : MonoBehaviour {
 	private List<PlayerUI> playerUi = new List<PlayerUI>();
 	public List<PlayerUI> PlayerUi { get { return playerUi; } }
 
+	public PlayerUI winningPlayer { get { return GetPlayerHighestScore(); } }
+
 	private void Awake()
 	{
 		if (instance == null)
@@ -30,5 +32,10 @@ public class PlayerUIHolder : MonoBehaviour {
 		}
 
 		return player;
+	}
+
+	public void DisplayWinner()
+	{
+		
 	}
 }

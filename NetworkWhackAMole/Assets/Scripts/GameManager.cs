@@ -88,7 +88,6 @@ public class GameManager : Photon.PunBehaviour{
 					Instantiate(playerUiPrefab, Vector3.zero, Quaternion.identity);
 			}
 
-
 			if (onPlayerSpawned != null)
 				onPlayerSpawned.Invoke();
 		}
@@ -108,7 +107,7 @@ public class GameManager : Photon.PunBehaviour{
 	{
 		SetAllPlayersCanMove(false);
 		MoleManager.Instance.Stop();
-		Debug.Log(PlayerUIHolder.Instance.GetPlayerHighestScore().Score);
+		Debug.Log(PlayerUIHolder.Instance.winningPlayer.Score);
 	}
 
 	private void SetAllPlayersCanMove(bool state)

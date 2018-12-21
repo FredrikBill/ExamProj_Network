@@ -175,6 +175,8 @@ public class MoleManager : MonoBehaviour {
 		{
 			dynamiteMoles[i].transform.position = moleSpawnPoint.position;
 		}
+
+		bigMole.onBigMoleRetracted -= ResetMolePositions;
 	}
 	
 	private void OnDrawGizmos()
